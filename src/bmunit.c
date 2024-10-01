@@ -33,7 +33,7 @@ EWRAM_DATA struct Unit gUnitArrayRed[50]   = {}; // Red units
 EWRAM_DATA struct Unit gUnitArrayGreen[20] = {}; // Green units
 EWRAM_DATA struct Unit gUnitArrayPurple[5] = {}; // Purple units
 
-CONST_DATA static int sStatusNameTextIdLookup[] = {
+CONST_DATA int sStatusNameTextIdLookup[] = {
     // TODO: TEXT ID DEFINITIONS
 
     [UNIT_STATUS_NONE]     = 0x536,

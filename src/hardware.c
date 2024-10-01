@@ -158,7 +158,7 @@ void BG_SetColorBpp(int bg, int bitsPerPixel)
     BG_GetControlBuffer(bg)->colorMode = (bitsPerPixel == 8) ? 1 : 0;
 }
 
-static void ApplyColorAddition_ClampMax(int a)
+void ApplyColorAddition_ClampMax(int a)
 {
     int i;
     u16 *src = gPaletteBuffer;
@@ -184,7 +184,7 @@ static void ApplyColorAddition_ClampMax(int a)
     }
 }
 
-static void ApplyColorAddition_ClampMin(int a)
+void ApplyColorAddition_ClampMin(int a)
 {
     int i;
     u16 *src = gPaletteBuffer;

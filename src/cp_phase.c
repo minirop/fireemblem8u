@@ -7,9 +7,9 @@
 
 #include "cp_common.h"
 
-static void AiPhaseInit(struct Proc* proc);
-static void AiPhaseBerserkInit(struct Proc* proc);
-static void AiPhaseCleanup(struct Proc* proc);
+void AiPhaseInit(struct Proc* proc);
+void AiPhaseBerserkInit(struct Proc* proc);
+void AiPhaseCleanup(struct Proc* proc);
 
 EWRAM_DATA struct AiState gAiState = {0};
 
@@ -39,7 +39,7 @@ struct ProcCmd gProcScr_BerserkCpPhase[] =
     PROC_END,
 };
 
-static void AiPhaseInit(struct Proc* proc)
+void AiPhaseInit(struct Proc* proc)
 {
     int i;
 
@@ -60,7 +60,7 @@ static void AiPhaseInit(struct Proc* proc)
     Proc_StartBlocking(gProcScr_CpOrder, proc);
 }
 
-static void AiPhaseBerserkInit(struct Proc* proc)
+void AiPhaseBerserkInit(struct Proc* proc)
 {
     int i;
 
@@ -78,7 +78,7 @@ static void AiPhaseBerserkInit(struct Proc* proc)
     Proc_StartBlocking(gProcScr_BerserkCpOrder, proc);
 }
 
-static void AiPhaseCleanup(struct Proc* proc)
+void AiPhaseCleanup(struct Proc* proc)
 {
     gAiState.flags = AI_FLAGS_NONE;
 }

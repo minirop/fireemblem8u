@@ -33,9 +33,9 @@ struct ProcCmd CONST_DATA gProcScr_UpdateTraps[] =
     PROC_END,
 };
 
-static void GenerateFireTileTrapTargets(int x, int y, int damage);
-static void GenerateArrowTrapTargets(int x, int y, int damage);
-static void GenerateGasTrapTargets(int x, int y, int damage, int facing);
+void GenerateFireTileTrapTargets(int x, int y, int damage);
+void GenerateArrowTrapTargets(int x, int y, int damage);
+void GenerateGasTrapTargets(int x, int y, int damage, int facing);
 static s8 ShouldSkipGasTrapDisplay(int x, int y, int facing);
 
 EWRAM_DATA static struct Trap sTrapPool[TRAP_MAX_COUNT] = {};
