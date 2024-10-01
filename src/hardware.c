@@ -299,11 +299,22 @@ void ExecMainUpdate(void)
 
 void _UpdateKeyStatus(struct KeyStatusBuffer *keyStatus, s16 keys)
 {
+#ifdef EUROPE
+    register u32 r3 asm("r3");
+#endif
+
     keyStatus->prevKeys = keyStatus->heldKeys;
     keyStatus->heldKeys = keys;
 
     // keys that are pressed now, but weren't pressed before
-    keyStatus->newKeys = keyStatus->repeatedKeys = keyStatus->heldKeys & ~keyStatus->prevKeys;
+    keyStatus->repeatedKeys = keyStatus->heldKeys & ~keyStatus->prevKeys;
+#ifdef EUROPE
+    r3 = 0xFFFF;
+    asm("nop\nnop\nnop\nnop\n");
+    keyStatus->newKeys = r3 & keyStatus->heldKeys;
+#else
+    keyStatus->newKeys = keyStatus->heldKeys;
+#endif
 
     if (keyStatus->newKeys != 0)
         keyStatus->LastPressState = keys;
@@ -463,10 +474,35 @@ void sub_800154C(void* outTm, void const* inData, u8 base, u8 linebits)
         for (ix = xSize; ix >= 0; ix--)
             *out++ = *it++ + base;
     }
+
+#ifdef EUROPE
+    asm("nop\nnop\n");
+    asm("nop\nnop\n");
+    asm("nop\nnop\n");
+    asm("nop\nnop\n");
+    asm("nop\nnop\n");
+    asm("nop\nnop\n");
+#endif
 }
 
 void AddAttr2dBitMap(u16 * _dst, u16 * _src, s16 ix, s16 iy, u16 chr) // TODO: handle type of a1
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u16 *dst;
     s16 width, height;
     s16 _width;
@@ -527,6 +563,7 @@ void AddAttr2dBitMap(u16 * _dst, u16 * _src, s16 ix, s16 iy, u16 chr) // TODO: h
             }
         }
     }
+#endif
 }
 
 void sub_80016C4(u16 *a, struct UnknownDmaStruct *b)
@@ -677,6 +714,26 @@ void ColorFadeSetupFromWhite(u8 a)
 
 void sub_8001A6C(void)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\n");
+#else
     int i;
     int j;
     s16 r4;
@@ -717,6 +774,7 @@ void sub_8001A6C(void)
     }
 
     sModifiedPalette = 1;
+#endif
 }
 
 void SetupBackgrounds(u16 *bgConfig)
