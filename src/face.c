@@ -522,7 +522,13 @@ void FaceRefreshSprite(struct FaceProc* proc) {
 }
 
 //! FE8U = 0x08005894
-void PutFaceTm(u16 * tm, u8* data, int tileref, s8 isFlipped) {
+void PutFaceTm(u16 * tm, u8* data, int tileref,
+#ifdef EUROPE
+    int
+#else
+    s8
+#endif
+        isFlipped) {
     int ix;
     int iy;
 
@@ -558,6 +564,8 @@ void PutFaceTm(u16 * tm, u8* data, int tileref, s8 isFlipped) {
         }
     }
 
+    asm("nop\n");
+
     return;
 }
 
@@ -576,11 +584,21 @@ void UnpackFaceChibiGraphics(int fid, int chr, int pal) {
 }
 
 //! FE8U = 0x08005988
-void PutFaceChibi(int fid, u16 * tm, int chr, int pal, s8 isFlipped) {
+void PutFaceChibi(int fid, u16 * tm, int chr, int pal,
+#ifdef EUROPE
+    int
+#else
+    s8
+#endif
+        isFlipped) {
     UnpackFaceChibiGraphics(fid, chr, pal);
 
     chr &= 0x3FF;
     PutFaceTm(tm, gUnknown_085911C4, TILEREF(chr, pal), isFlipped);
+
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#endif
 
     return;
 }
