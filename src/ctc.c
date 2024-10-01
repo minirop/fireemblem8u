@@ -24,7 +24,7 @@ struct SpriteProc
     /* 54 */ const u16 * object;
 };
 
-static void SpriteRefresher_OnIdle(struct SpriteProc* proc);
+void SpriteRefresher_OnIdle(struct SpriteProc* proc);
 
 u16 CONST_DATA gObject_8x8[] =
 {

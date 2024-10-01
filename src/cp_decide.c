@@ -15,13 +15,13 @@
 
 #include "cp_common.h"
 
-static void CpDecide_Suspend(ProcPtr proc);
-static void CpDecide_Main(ProcPtr proc);
+void CpDecide_Suspend(ProcPtr proc);
+void CpDecide_Main(ProcPtr proc);
 
-static void DecideHealOrEscape(void);
-static void DecideScriptA(void);
-static void DecideScriptB(void);
-static void DecideSpecialItems(void);
+void DecideHealOrEscape(void);
+void DecideScriptA(void);
+void DecideScriptB(void);
+void DecideSpecialItems(void);
 
 EWRAM_DATA struct AiDecision gAiDecision = {0};
 

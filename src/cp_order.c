@@ -7,14 +7,14 @@
 
 #include "cp_common.h"
 
-static void CpOrderMain(ProcPtr proc);
-static void CpOrderBerserkInit(ProcPtr proc);
-static void CpOrderFunc_BeginDecide(ProcPtr proc);
-static int GetUnitBattleAiPriority(struct Unit* unit);
-static int GetUnitAiPriority(struct Unit* unit);
-static int BuildAiUnitList(void);
-static void SortAiUnitList(int count);
-static void CpOrderFunc_End(ProcPtr proc);
+void CpOrderMain(ProcPtr proc);
+void CpOrderBerserkInit(ProcPtr proc);
+void CpOrderFunc_BeginDecide(ProcPtr proc);
+int GetUnitBattleAiPriority(struct Unit* unit);
+int GetUnitAiPriority(struct Unit* unit);
+int BuildAiUnitList(void);
+void SortAiUnitList(int count);
+void CpOrderFunc_End(ProcPtr proc);
 
 static
 u32* CONST_DATA sUnitPriorityArray = (void*) gGenericBuffer;

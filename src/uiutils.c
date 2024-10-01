@@ -174,7 +174,7 @@ EWRAM_DATA
 static struct Vec2 sPrevHandScreenPosition = {};
 
 EWRAM_DATA
-static int sPrevHandClockFrame = 0;
+int sPrevHandClockFrame = 0;
 
 void UnpackLegacyUiFramePalette(int palId)
 {

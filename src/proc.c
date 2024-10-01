@@ -20,11 +20,11 @@ EWRAM_DATA static struct Proc **sProcAllocListHead = NULL; // pointer to next en
 EWRAM_DATA struct Proc *gProcTreeRootArray[8] = {0};
 
 static struct Proc* AllocateProcess(void);
-static void FreeProcess(struct Proc *proc);
-static void InsertRootProcess(struct Proc *proc, int rootIndex);
-static void InsertChildProcess(struct Proc *proc, struct Proc *parent);
-static void UnlinkProcess(struct Proc *proc);
-static void RunProcessScript(struct Proc *proc);
+void FreeProcess(struct Proc *proc);
+void InsertRootProcess(struct Proc *proc, int rootIndex);
+void InsertChildProcess(struct Proc *proc, struct Proc *parent);
+void UnlinkProcess(struct Proc *proc);
+void RunProcessScript(struct Proc *proc);
 
 void Proc_Init(void)
 {
@@ -102,7 +102,7 @@ ProcPtr Proc_StartBlocking(const struct ProcCmd *script, ProcPtr parent)
     return proc;
 }
 
-static void DeleteProcessRecursive(struct Proc *proc)
+void DeleteProcessRecursive(struct Proc *proc)
 {
     if (proc->proc_prev)
         DeleteProcessRecursive(proc->proc_prev);
@@ -145,7 +145,7 @@ static struct Proc *AllocateProcess(void)
     return proc;
 }
 
-static void FreeProcess(struct Proc *proc)
+void FreeProcess(struct Proc *proc)
 {
     // place the process back into the allocation list
     sProcAllocListHead--;
@@ -153,7 +153,7 @@ static void FreeProcess(struct Proc *proc)
 }
 
 // adds the process as a root process
-static void InsertRootProcess(struct Proc *proc, s32 rootIndex)
+void InsertRootProcess(struct Proc *proc, s32 rootIndex)
 {
     struct Proc* root = ROOT_PROC(rootIndex);
 
@@ -169,7 +169,7 @@ static void InsertRootProcess(struct Proc *proc, s32 rootIndex)
 }
 
 // adds the process to the tree as a child of 'parent'
-static void InsertChildProcess(struct Proc *proc, struct Proc *parent)
+void InsertChildProcess(struct Proc *proc, struct Proc *parent)
 {
     if (parent->proc_child != NULL)  // parent already has a child
     {
@@ -182,7 +182,7 @@ static void InsertChildProcess(struct Proc *proc, struct Proc *parent)
 }
 
 // removes the process from the tree
-static void UnlinkProcess(struct Proc *proc)
+void UnlinkProcess(struct Proc *proc)
 {
     int rootIndex;
 
@@ -209,7 +209,7 @@ static void UnlinkProcess(struct Proc *proc)
 }
 
 // Runs all processes using a pre-order traversal.
-static void RunProcessRecursive(struct Proc* proc)
+void RunProcessRecursive(struct Proc* proc)
 {
     // Run previous sibling process
     if (proc->proc_prev != NULL)
@@ -396,7 +396,7 @@ void Proc_EndEachMarked(int mark)
     }
 }
 
-static void Delete(ProcPtr proc)
+void Delete(ProcPtr proc)
 {
     Proc_End(proc);
 }
@@ -406,7 +406,7 @@ void Proc_EndEach(const struct ProcCmd* script)
     Proc_ForEach(script, Delete);
 }
 
-static void ClearNativeCallback(ProcPtr proc)
+void ClearNativeCallback(ProcPtr proc)
 {
     Proc_Break(proc);
 }
@@ -416,7 +416,7 @@ void Proc_BreakEach(const struct ProcCmd* script)
     Proc_ForEach(script, ClearNativeCallback);
 }
 
-static void ForAllFollowingProcs(struct Proc* proc, ProcFunc func)
+void ForAllFollowingProcs(struct Proc* proc, ProcFunc func)
 {
     if (proc->proc_prev)
         ForAllFollowingProcs(proc->proc_prev, func);
@@ -428,7 +428,7 @@ static void ForAllFollowingProcs(struct Proc* proc, ProcFunc func)
 }
 
 // unreferenced
-static void sub_80030CC(ProcPtr proc, ProcFunc func)
+void sub_80030CC(ProcPtr proc, ProcFunc func)
 {
     struct Proc* casted = (struct Proc*) proc;
 
@@ -500,7 +500,7 @@ static s8 ProcCmd_WHILE_ROUTINE(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_LOOP_ROUTINE(struct Proc *proc)
+s8 ProcCmd_LOOP_ROUTINE(struct Proc *proc)
 {
     proc->proc_idleCb = proc->proc_scrCur->dataPtr;
     proc->proc_scrCur++;
@@ -508,7 +508,7 @@ static s8 ProcCmd_LOOP_ROUTINE(struct Proc *proc)
     return FALSE;
 }
 
-static s8 ProcCmd_SET_DESTRUCTOR(struct Proc *proc)
+s8 ProcCmd_SET_DESTRUCTOR(struct Proc *proc)
 {
     Proc_SetEndCb(proc, proc->proc_scrCur->dataPtr);
     proc->proc_scrCur++;
@@ -516,7 +516,7 @@ static s8 ProcCmd_SET_DESTRUCTOR(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_NEW_CHILD(struct Proc* proc)
+s8 ProcCmd_NEW_CHILD(struct Proc* proc)
 {
     Proc_Start(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
@@ -524,7 +524,7 @@ static s8 ProcCmd_NEW_CHILD(struct Proc* proc)
     return TRUE;
 }
 
-static s8 ProcCmd_NEW_CHILD_BLOCKING(struct Proc* proc)
+s8 ProcCmd_NEW_CHILD_BLOCKING(struct Proc* proc)
 {
     Proc_StartBlocking(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
@@ -532,7 +532,7 @@ static s8 ProcCmd_NEW_CHILD_BLOCKING(struct Proc* proc)
     return FALSE;
 }
 
-static s8 ProcCmd_NEW_MAIN_BUGGED(struct Proc *proc)
+s8 ProcCmd_NEW_MAIN_BUGGED(struct Proc *proc)
 {
     Proc_Start(proc->proc_scrCur->dataPtr, (struct Proc *)(u32) proc->proc_sleepTime);  // Why are we using sleepTime here?
     proc->proc_scrCur++;
@@ -540,7 +540,7 @@ static s8 ProcCmd_NEW_MAIN_BUGGED(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_WHILE_EXISTS(struct Proc *proc)
+s8 ProcCmd_WHILE_EXISTS(struct Proc *proc)
 {
     s8 exists = (Proc_Find(proc->proc_scrCur->dataPtr) != NULL);
 
@@ -552,7 +552,7 @@ static s8 ProcCmd_WHILE_EXISTS(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_END_ALL(struct Proc *proc)
+s8 ProcCmd_END_ALL(struct Proc *proc)
 {
     Proc_EndEach(proc->proc_scrCur->dataPtr);
     proc->proc_scrCur++;
@@ -560,7 +560,7 @@ static s8 ProcCmd_END_ALL(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_BREAK_ALL_LOOP(struct Proc *proc)
+s8 ProcCmd_BREAK_ALL_LOOP(struct Proc *proc)
 {
     Proc_BreakEach(proc->proc_scrCur->dataPtr);
     proc->proc_scrCur++;
@@ -568,28 +568,28 @@ static s8 ProcCmd_BREAK_ALL_LOOP(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_NOP(struct Proc *proc)
+s8 ProcCmd_NOP(struct Proc *proc)
 {
     proc->proc_scrCur++;
 
     return TRUE;
 }
 
-static s8 ProcCmd_JUMP(struct Proc *proc)
+s8 ProcCmd_JUMP(struct Proc *proc)
 {
     Proc_GotoScript(proc, proc->proc_scrCur->dataPtr);
 
     return TRUE;
 }
 
-static s8 ProcCmd_GOTO(struct Proc *proc)
+s8 ProcCmd_GOTO(struct Proc *proc)
 {
     Proc_Goto(proc, proc->proc_scrCur->dataImm);
 
     return TRUE;
 }
 
-static void UpdateSleep(ProcPtr proc)
+void UpdateSleep(ProcPtr proc)
 {
     ((struct Proc*) proc)->proc_sleepTime--;
 
@@ -597,7 +597,7 @@ static void UpdateSleep(ProcPtr proc)
         Proc_Break(proc);
 }
 
-static s8 ProcCmd_SLEEP(struct Proc *proc)
+s8 ProcCmd_SLEEP(struct Proc *proc)
 {
     if (proc->proc_scrCur->dataImm != 0)
     {
@@ -610,7 +610,7 @@ static s8 ProcCmd_SLEEP(struct Proc *proc)
     return FALSE;
 }
 
-static s8 ProcCmd_SET_MARK(struct Proc *proc)
+s8 ProcCmd_SET_MARK(struct Proc *proc)
 {
     proc->proc_mark = proc->proc_scrCur->dataImm;
     proc->proc_scrCur++;
@@ -618,18 +618,18 @@ static s8 ProcCmd_SET_MARK(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_NOP2(struct Proc *proc)
+s8 ProcCmd_NOP2(struct Proc *proc)
 {
     proc->proc_scrCur++;
     return TRUE;
 }
 
-static s8 ProcCmd_BLOCK(struct Proc *proc)
+s8 ProcCmd_BLOCK(struct Proc *proc)
 {
     return FALSE;
 }
 
-static s8 ProcCmd_END_IF_DUPLICATE(struct Proc *proc)
+s8 ProcCmd_END_IF_DUPLICATE(struct Proc *proc)
 {
     int i;
     struct Proc *it = sProcArray;
@@ -652,7 +652,7 @@ static s8 ProcCmd_END_IF_DUPLICATE(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_END_DUPLICATES(struct Proc *proc)
+s8 ProcCmd_END_DUPLICATES(struct Proc *proc)
 {
     int i;
     struct Proc* it = sProcArray;
@@ -671,14 +671,14 @@ static s8 ProcCmd_END_DUPLICATES(struct Proc *proc)
     return TRUE;
 }
 
-static s8 ProcCmd_NOP3(struct Proc *proc)
+s8 ProcCmd_NOP3(struct Proc *proc)
 {
     proc->proc_scrCur++;
 
     return TRUE;
 }
 
-static s8 ProcCmd_SET_BIT4(struct Proc *proc)
+s8 ProcCmd_SET_BIT4(struct Proc *proc)
 {
     proc->proc_flags |= PROC_FLAG_UNK2;
     proc->proc_scrCur++;
@@ -716,7 +716,7 @@ static s8(*sProcessCmdTable[])(struct Proc*) =
     ProcCmd_NOP,
 };
 
-static void RunProcessScript(struct Proc* proc)
+void RunProcessScript(struct Proc* proc)
 {
     if (proc->proc_script == NULL)
         return;
@@ -737,11 +737,11 @@ static void RunProcessScript(struct Proc* proc)
 // This was likely used to print the process list in the debug version of the game,
 // but does nothing in the release version.
 
-static void PrintProcessName(struct Proc* proc)
+void PrintProcessName(struct Proc* proc)
 {
 }
 
-static void PrintProcessNameRecursive(struct Proc* proc, int* indent)
+void PrintProcessNameRecursive(struct Proc* proc, int* indent)
 {
     if (proc->proc_prev != NULL)
         PrintProcessNameRecursive(proc->proc_prev, indent);
@@ -757,7 +757,7 @@ static void PrintProcessNameRecursive(struct Proc* proc, int* indent)
 }
 
 // unreferenced
-static void PrintProcessTree(struct Proc* proc)
+void PrintProcessTree(struct Proc* proc)
 {
     int indent = 4;
 
@@ -772,7 +772,7 @@ static void PrintProcessTree(struct Proc* proc)
 }
 
 // unreferenced
-static void sub_800344C(void)
+void sub_800344C(void)
 {
 }
 
@@ -784,13 +784,13 @@ void Proc_SetRepeatCb(ProcPtr proc, ProcFunc func)
 }
 
 // unreferenced
-static void Proc_BlockSemaphore(struct Proc *proc)
+void Proc_BlockSemaphore(struct Proc *proc)
 {
     proc->proc_lockCnt++;
 }
 
 // unreferenced
-static void Proc_WakeSemaphore(struct Proc *proc)
+void Proc_WakeSemaphore(struct Proc *proc)
 {
     proc->proc_lockCnt--;
 }
@@ -832,7 +832,7 @@ struct Proc *Proc_FindAfterWithParent(struct Proc* proc, struct Proc* parent)
 }
 
 // unreferenced
-static int sub_80034D4(void)
+int sub_80034D4(void)
 {
     int i, result = MAX_PROC_COUNT;
 

@@ -14,7 +14,7 @@
 
 #include "bmidoten.h"
 
-static void RevertMovementScript(u8* begin, u8* end);
+void RevertMovementScript(u8* begin, u8* end);
 
 inline void SetWorkingBmMap(u8** map)
 {

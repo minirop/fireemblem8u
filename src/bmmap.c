@@ -12,14 +12,14 @@
 #include "bmtrick.h"
 #include "bmlib.h"
 
-static void BmMapInit(void* buffer, u8*** outHandle, int width, int height);
+void BmMapInit(void* buffer, u8*** outHandle, int width, int height);
 
-static void RenderBmMapColumn(u16 xOffset);
-static void RenderBmMapLine(u16 yOffset);
+void RenderBmMapColumn(u16 xOffset);
+void RenderBmMapLine(u16 yOffset);
 
-static void RefreshUnitsOnBmMap(void);
-static void RefreshTorchlightsOnBmMap(void);
-static void RefreshMinesOnBmMap(void);
+void RefreshUnitsOnBmMap(void);
+void RefreshTorchlightsOnBmMap(void);
+void RefreshMinesOnBmMap(void);
 
 EWRAM_OVERLAY(bmstart) u16 gBmMapBuffer[0x800 / 2] = {};
 

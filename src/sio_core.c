@@ -13,7 +13,7 @@ u16 EWRAM_DATA gSioOutgoing[0x200] = { 0 };
 u16 EWRAM_DATA gSioIncoming[0x200][4] = { 0 };
 
 static u8 sSioCnt;
-static int sSioId;
+int sSioId;
 static struct SioPending * sUnknown_030017E8;
 static u32 sUnknown_030017EC;
 

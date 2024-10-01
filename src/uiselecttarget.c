@@ -15,7 +15,7 @@ static struct Vec2 EWRAM_DATA sSelectTargetRoot = {};
 
 static struct SelectTarget EWRAM_DATA sSelectTargetList[MAX_TARGET_LIST_COUNT] = {0};
 
-static int EWRAM_DATA sSelectTargetCount = 0;
+int EWRAM_DATA sSelectTargetCount = 0;
 
 struct ProcCmd CONST_DATA gProcScr_TargetSelection[] =
 {
