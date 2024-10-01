@@ -316,6 +316,13 @@ void sub_8003C20(int a, int b, int c, int length)
 
 void sub_8003C44(s16 a, s16 b, const char *fmt, ...)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#else
     va_list args;
     char buffer[256];
 
@@ -324,6 +331,7 @@ void sub_8003C44(s16 a, s16 b, const char *fmt, ...)
     va_end(args);
 
     PrintDebugStringAsOBJ(a, b, buffer);
+#endif
 }
 
 int GetLang(void)

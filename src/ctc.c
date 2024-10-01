@@ -189,6 +189,9 @@ void PushSpriteLayerObjects(int layer)
 
         it = it->next;
     }
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\n");
+#endif
 }
 
 void SpriteRefresher_OnIdle(struct SpriteProc* proc)
