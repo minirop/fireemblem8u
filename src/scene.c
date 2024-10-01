@@ -31,7 +31,7 @@ extern u8 CONST_DATA Img_TalkBubble[];
 static struct TalkState sTalkStateCore;
 struct TalkState* CONST_DATA sTalkState = &sTalkStateCore;
 static struct Text sTalkText[3];
-int sTalkChoiceResult;
+static int sTalkChoiceResult;
 static struct Font sTalkFont;
 
 struct ProcCmd CONST_DATA gProcScr_TalkSkipListener[] =
