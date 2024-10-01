@@ -96,6 +96,13 @@ void sub_80A7360(struct GameRankSaveDataPacks* src, struct GameRankSaveDataPacks
     return;
 }
 
+#ifdef EUROPE
+bool FUN_080a49b0()
+{
+    return false;
+}
+#endif
+
 //! FE8U = 0x080A7374
 void EraseInvalidSaveData(void)
 {
