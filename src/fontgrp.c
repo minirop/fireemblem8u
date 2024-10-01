@@ -1123,6 +1123,12 @@ void DrawSpecialCharGlyph(int a, int b, struct Glyph *glyph)
 
         *r8++ = var2;
     }
+
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\n");
+#endif
 }
 
 int AddSpecialChar(struct SpecialCharSt *st, int color, int id)
@@ -1134,6 +1140,11 @@ int AddSpecialChar(struct SpecialCharSt *st, int color, int id)
     (st + 1)->color = -1;
 
     DrawSpecialCharGlyph(st->chr_position, color, TextGlyphs_Special[id]);
+
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+    asm("nop\nnop\n");
 
     return st->chr_position;
 }

@@ -107,9 +107,14 @@ int SetFaceDisplayBitsById(int slot, int disp);
 int GetFaceDisplayBits(struct FaceProc*);
 int GetFaceDisplayBitsById(int slot);
 void FaceRefreshSprite(struct FaceProc* proc);
-void PutFaceTm(u16 * tm, u8* data, int tileref, s8 isFlipped);
 void UnpackFaceChibiGraphics(int fid, int chr, int pal);
+#ifdef EUROPE
+void PutFaceTm(u16 * tm, u8* data, int tileref, int isFlipped);
+void PutFaceChibi(int, u16*, int, int, int);
+#else
+void PutFaceTm(u16 * tm, u8* data, int tileref, s8 isFlipped);
 void PutFaceChibi(int, u16*, int, int, s8);
+#endif
 void UnpackFaceChibiSprGraphics(int fid, int chr, int pal);
 void FaceChibiSpr_OnIdle(struct FaceProc* proc);
 void StartFaceChibiSpr(int x, int y, int fid, int chr, int pal, s8 isFlipped, ProcPtr parent);
