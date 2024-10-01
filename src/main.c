@@ -14,10 +14,19 @@
 // uninitialized memory in the original build due to changing this call to no longer use __FILE__.
 const u16 gUninitializedMemory[] = {0x4641, 0x464A, 0x4653, 0x465C};
 
+#ifdef EUROPE
+const char gBuildDateTime[] = "2005/07/12(TUE) 19:24:55";
+const char gProjectInternalTitle[] = "AGBFE3";
+#else
 const char gBuildDateTime[] = "2005/02/04(FRI) 16:55:40";
 const char gYearProjectCreated[] = "_2003";
+#endif
 
 void StoreIRQToIRAM();
+
+#ifndef EUROPE
+bool FUN_080a49b0();
+#endif
 
 void AgbMain()
 {
@@ -60,7 +69,9 @@ void AgbMain()
     InitRN(AdvanceGetLCGRNValue());
     DisableKeyComboResetEN();
     EraseInvalidSaveData();
+#ifndef EUROPE
     EraseSramDataIfInvalid();
+#endif
 
     // initialize sound
     m4aSoundInit();
@@ -68,7 +79,15 @@ void AgbMain()
 
     SetInterrupt_LCDVBlank(OnVBlank);
     GmDataInit();
+#ifdef EUROPE
+    FUN_080a49b0();
+    if (GetLang() > 4)
+    {
+        SetLang(0);
+    }
+#else
     SetLang(LANG_ENGLISH);
+#endif
     ResetText();
     StartGame();
 
