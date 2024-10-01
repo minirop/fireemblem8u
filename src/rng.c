@@ -2,7 +2,7 @@
 #include "rng.h"
 
 static u16 gRNSeeds[3];
-int gLCGRNValue;
+static int gLCGRNValue;
 
 int NextRN(void) {
     // This generates a pseudorandom string of 16 bits
