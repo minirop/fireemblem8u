@@ -173,8 +173,12 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2_SYS2;
 
 // const data
 // extern ??? gUnknown_08000540
-extern const char gBuildDateTime[]; // "2005/02/04(FRI) 16:55:40...."
+extern const char gBuildDateTime[];
+#ifdef EUROPE
+extern const char gProjectInternalTitle[]; // "AGBFE3..."
+#else
 extern const char gYearProjectCreated[]; // "_2003..."
+#endif
 // extern ??? gUnknown_080D74F4
 extern const u16 gUnknown_080D7504[];
 // extern ??? gUnknown_080D77BC

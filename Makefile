@@ -11,6 +11,8 @@ UNAME := $(shell uname)
 TOOLCHAIN ?= $(DEVKITARM)
 PREFIX ?= arm-none-eabi-
 
+REGION ?= USA
+
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 
 ifeq ($(UNAME),Darwin)
@@ -48,7 +50,7 @@ else
 endif
 
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
-CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
+CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef -D $(REGION)
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include
 
 #### Files ####
@@ -60,7 +62,11 @@ DATA_SRC_SUBDIR = src/data
 SAMPLE_SUBDIR = sound/direct_sound_samples
 MID_SUBDIR = sound/songs/midi
 
+ifeq ($(REGION),EUROPE)
+ROM          := fireemblem8.eur.gba
+else
 ROM          := fireemblem8.gba
+endif
 ELF          := $(ROM:.gba=.elf)
 MAP          := $(ROM:.gba=.map)
 LDSCRIPT     := ldscript.txt
@@ -97,7 +103,7 @@ src/bmitem.o: CC1FLAGS += -Wno-error
 #### Main Targets ####
 
 compare: $(ROM)
-	$(SHASUM) -c checksum.sha1
+	$(SHASUM) --ignore-missing -c checksum.sha1
 
 .PHONY: compare
 
