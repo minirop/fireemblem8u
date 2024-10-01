@@ -21,7 +21,7 @@ enum ScriptKind {
 typedef void(*AiScrCmd)(u8* pc);
 
 static s8 gAiScriptEnded;
-static int gAiScriptKind;
+int gAiScriptKind;
 static struct AiScr* gpAiScriptCurrent;
 static AiScrFunc gpCurrentAiFunctionCall;
 

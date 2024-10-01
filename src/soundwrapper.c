@@ -27,7 +27,7 @@ struct MusicProc {
     /*0x6A*/ s16 vc_time_end;
 };
 
-static void MusicVc_OnLoop(struct Proc *proc);
+void MusicVc_OnLoop(struct Proc *proc);
 
 int GetCurrentBgmSong(void)
 {
@@ -266,7 +266,7 @@ void StartBgmVolumeChange(int volume, int b, int c, ProcPtr parent)
     sMusicProc2 = (ProcPtr)proc;
 }
 
-static void MusicVc_OnLoop(struct Proc *proc)
+void MusicVc_OnLoop(struct Proc *proc)
 {
     struct MusicProc *mproc = (struct MusicProc *)proc;
     int volume = Interpolate(4, mproc->vc_init_volume, mproc->vc_end_volume, mproc->vc_clock++, mproc->vc_time_end);

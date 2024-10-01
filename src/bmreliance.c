@@ -5,7 +5,7 @@
 #include "bmreliance.h"
 
 CONST_DATA
-static int sSupportMaxExpLookup[] = {
+int sSupportMaxExpLookup[] = {
     [SUPPORT_LEVEL_NONE] = SUPPORT_EXP_C-1,
     [SUPPORT_LEVEL_C]    = SUPPORT_EXP_B-1,
     [SUPPORT_LEVEL_B]    = SUPPORT_EXP_A-1,
@@ -13,10 +13,10 @@ static int sSupportMaxExpLookup[] = {
 };
 
 static const struct SupportBonuses* GetAffinityBonuses(int affinity);
-static void ApplyAffinitySupportBonuses(struct SupportBonuses* bonuses, int affinity, int level);
-static void InitSupportBonuses(struct SupportBonuses* bonuses);
+void ApplyAffinitySupportBonuses(struct SupportBonuses* bonuses, int affinity, int level);
+void InitSupportBonuses(struct SupportBonuses* bonuses);
 
-static void SetSupportLevelGained(u8 charA, u8 charB);
+void SetSupportLevelGained(u8 charA, u8 charB);
 static s8 HasUnitGainedSupportLevel(struct Unit* unit, int num);
 
 int GetUnitSupporterCount(struct Unit* unit)
@@ -248,7 +248,7 @@ static const struct SupportBonuses* GetAffinityBonuses(int affinity)
     // return NULL; // BUG?
 }
 
-static void ApplyAffinitySupportBonuses(struct SupportBonuses* bonuses, int affinity, int level)
+void ApplyAffinitySupportBonuses(struct SupportBonuses* bonuses, int affinity, int level)
 {
     const struct SupportBonuses* added = GetAffinityBonuses(affinity);
 
@@ -260,7 +260,7 @@ static void ApplyAffinitySupportBonuses(struct SupportBonuses* bonuses, int affi
     bonuses->bonusDodge   += level * added->bonusDodge;
 }
 
-static void InitSupportBonuses(struct SupportBonuses* bonuses)
+void InitSupportBonuses(struct SupportBonuses* bonuses)
 {
     bonuses->bonusAttack  = 0;
     bonuses->bonusDefense = 0;
@@ -360,7 +360,7 @@ char* GetAffinityName(int affinity)
     return GetStringFromIndex(textIdLookup[affinity]);
 }
 
-static void SetSupportLevelGained(u8 charA, u8 charB)
+void SetSupportLevelGained(u8 charA, u8 charB)
 {
     struct Unit* unit = GetUnitFromCharId(charA);
     int num = GetUnitSupporterNum(unit, charB);

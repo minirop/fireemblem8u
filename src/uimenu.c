@@ -47,8 +47,8 @@ struct ProcCmd sProc_MenuItem[] =
     PROC_BLOCK
 };
 
-static void Menu_AutoHelpBox_OnInit(struct MenuProc* proc);
-static void Menu_AutoHelpBox_OnLoop(struct MenuProc* proc);
+void Menu_AutoHelpBox_OnInit(struct MenuProc* proc);
+void Menu_AutoHelpBox_OnLoop(struct MenuProc* proc);
 
 static CONST_DATA
 struct ProcCmd sProc_MenuAutoHelpBox[] =
@@ -58,7 +58,7 @@ struct ProcCmd sProc_MenuAutoHelpBox[] =
     PROC_END
 };
 
-static void Menu_FrozenHelpBox_OnLoop(struct MenuProc* proc);
+void Menu_FrozenHelpBox_OnLoop(struct MenuProc* proc);
 
 static CONST_DATA
 struct ProcCmd sProc_MenuFrozenHelpBox[] =
@@ -67,7 +67,7 @@ struct ProcCmd sProc_MenuFrozenHelpBox[] =
     PROC_END
 };
 
-static void Menu_Frozen_OnLoop(struct MenuProc* proc);
+void Menu_Frozen_OnLoop(struct MenuProc* proc);
 
 static CONST_DATA
 struct ProcCmd sProc_MenuFrozen[] =

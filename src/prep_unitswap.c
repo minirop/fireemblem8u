@@ -31,9 +31,9 @@ struct PrepUnitSwapProc {
     /* 44 */ int divisor;
 };
 
-static void PrepUnitSwapProc_Init(struct PrepUnitSwapProc *proc);
-static void PrepUnitSwapProc_MainLoop(struct PrepUnitSwapProc *proc);
-static void PrepUnitSwapProc_OnEnd(struct PrepUnitSwapProc *proc);
+void PrepUnitSwapProc_Init(struct PrepUnitSwapProc *proc);
+void PrepUnitSwapProc_MainLoop(struct PrepUnitSwapProc *proc);
+void PrepUnitSwapProc_OnEnd(struct PrepUnitSwapProc *proc);
 
 
 /* secton.data */
