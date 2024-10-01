@@ -473,7 +473,12 @@ static s8 ProcCmd_CALL_ROUTINE_2(struct Proc *proc)
 
 static s8 ProcCmd_CALL_ROUTINE_ARG(struct Proc *proc)
 {
-    short arg = proc->proc_scrCur->dataImm;
+#ifdef EUROPE
+    int
+#else
+    short
+#endif
+        arg = proc->proc_scrCur->dataImm;
     s8(*func)(short, ProcPtr) = proc->proc_scrCur->dataPtr;
 
     proc->proc_scrCur++;
