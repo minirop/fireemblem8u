@@ -310,7 +310,6 @@ void _UpdateKeyStatus(struct KeyStatusBuffer *keyStatus, s16 keys)
     keyStatus->repeatedKeys = keyStatus->heldKeys & ~keyStatus->prevKeys;
 #ifdef EUROPE
     r3 = 0xFFFF;
-    asm("nop\nnop\nnop\nnop\n");
     keyStatus->newKeys = r3 & keyStatus->heldKeys;
 #else
     keyStatus->newKeys = keyStatus->heldKeys;

@@ -2066,7 +2066,9 @@ u8 Event25_ChangeMap(struct EventEngineProc * proc)
     gBmSt.camera.y = GetCameraCenteredY(y * 16);
 
     RefreshEntityBmMaps();
+#ifndef EUROPE
     RenderBmMap();
+#endif
     RefreshUnitSprites();
     RefreshBMapGraphics();
 
@@ -2128,8 +2130,9 @@ u8 Event26_CameraControl(struct EventEngineProc * proc)
         else
             sub_8015D84(proc, x, y);
 
+#ifndef EUROPE
         SetCursorMapPosition(x, y);
-
+#endif
         return EVC_ADVANCE_YIELD;
     }
 }
@@ -2144,6 +2147,10 @@ u8 Event27_MapChange(struct EventEngineProc * proc)
 
     u8 subcode = EVT_SUB_CMD(proc->pEventCurrent);
     s16 mapChangeId = EVT_CMD_ARGV(proc->pEventCurrent)[0];
+
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 
     switch (mapChangeId) {
     case (-1): // "at position in Slot B"
@@ -2289,8 +2296,12 @@ u8 Event2A_MoveToChapter(struct EventEngineProc * proc)
 
     proc->evStateBits |= EV_STATE_CHANGECH;
 
+#ifdef EUROPE
+    asm("NOP\n");
+#else
     DeleteAll6CWaitMusicRelated();
     Sound_FadeOutBGM(4);
+#endif
 
     return EVC_ADVANCE_CONTINUE;
 }
@@ -2367,7 +2378,9 @@ void EventLoadUnitWithMovement(struct EventEngineProc * proc)
 
     if ((proc->evStateBits >> 2) & 1)
     {
+#ifndef EUROPE
         EventLoadUnitSliently(pUnitDefinition, count, param);
+#endif
     }
     else
     {
@@ -2388,17 +2401,23 @@ void EventLoadUnitWithMovement(struct EventEngineProc * proc)
         }
     }
 
+#ifndef EUROPE
     proc->unitLoadCount = 0;
     proc->chance = 0;
     proc->pCallback = NULL;
+#endif
 }
 
 void EventLoadUnitSliently(const struct UnitDefinition * def, s16 count, u8 param)
 {
     s8 r3 = FALSE;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (param == 2)
         r3 = TRUE;
+#endif
 
     for (; def->charIndex && count > 0; ++def)
     {
@@ -2466,7 +2485,11 @@ void LoadUnit_800F704(const struct UnitDefinition * def, u16 b, s8 quiet, s8 d)
             b &= ~0x0001;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     unit->xPos = def->xPosition;
+#endif
     unit->yPos = def->yPosition;
 
     if (def->allegiance == FACTION_ID_RED && unit->pCharacterData->number >= 0x3C)
@@ -2646,15 +2669,18 @@ struct UnitDefinition * GetUnitDefinitionFormEventScr(struct UnitDefinition * so
         "movs r3, #0\n"
         "cmp r2, #0\n"
         "beq _0800F994\n"
+#ifndef EUROPE
         "str r6, [sp, #0x54]\n"
         "lsls r0, r1, #0x10\n"
         "asrs r0, r0, #0x10\n"
         "cmp r3, r0\n"
+#endif
         "bge _0800F982\n"
         "movs r1, #0x40\n"
         "mov r9, r1\n"
         "adds r7, r0, #0\n"
     "_0800F956:\n"
+#ifndef EUROPE
         "ldr r2, [sp, #0x54]\n"
         "ldrb r1, [r2, #5]\n"
         "mov r0, r9\n"
@@ -2678,6 +2704,7 @@ struct UnitDefinition * GetUnitDefinitionFormEventScr(struct UnitDefinition * so
         "lsrs r3, r0, #0x10\n"
         "cmp r3, r7\n"
         "blt _0800F956\n"
+#endif
     "_0800F982:\n"
         "mov r5, ip\n"
         "mov r0, r8\n"
@@ -2911,8 +2938,12 @@ u8 Event2B_ConfigLoadUnit(struct EventEngineProc * proc)
     u8 subcode = EVT_SUB_CMD(proc->pEventCurrent);
     s16 argument = EVT_CMD_ARGV(proc->pEventCurrent)[0];
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (argument < 0)
         argument = gEventSlots[2];
+#endif
 
     switch (subcode) {
     case EVSUBCMD_LOAD_SETCOUNT:
@@ -2979,8 +3010,12 @@ u8 Event2C_LoadUnits(struct EventEngineProc * proc)
     }
     else
     {
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         proc->pUnitLoadData = ud;
         proc->unitLoadCount = count;
+#endif
         proc->unitLoadParameter = argument;
 
         proc->pCallback = EventLoadUnitWithMovement;
