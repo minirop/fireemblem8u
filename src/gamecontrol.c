@@ -608,6 +608,16 @@ void GameControl_ChapterSwitch(struct GameCtrlProc* proc) {
 
     ChapterChangeUnitCleanup();
 
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#endif
+
     return;
 }
 
