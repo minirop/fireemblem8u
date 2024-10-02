@@ -57,6 +57,8 @@ u8 Event83_WmSetCamera(struct EventEngineProc * proc)
     gGMData.xCamera = x;
     gGMData.yCamera = y;
 
+    asm("nop\n");
+
     return EVC_ADVANCE_CONTINUE;
 }
 
@@ -90,12 +92,22 @@ u8 Event85_WmSetCameraOntoUnit(struct EventEngineProc * proc)
     gGMData.xCamera = x;
     gGMData.yCamera = y;
 
+    asm("nop\n");
+
     return EVC_ADVANCE_CONTINUE;
 }
 
 //! FE8U = 0x0800BED4
 u8 Event86_WmScrollCamera(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s16 xStart = EVT_CMD_ARGV(proc->pEventCurrent)[1];
     s16 yStart = EVT_CMD_ARGV(proc->pEventCurrent)[2];
 
@@ -116,11 +128,23 @@ u8 Event86_WmScrollCamera(struct EventEngineProc * proc)
     StartGmScroll(xStart, yStart, xEnd, yEnd, speed, delay);
 
     return EVC_ADVANCE_YIELD;
+#endif
 }
 
 //! FE8U = 0x0800BF38
 u8 Event87_WmScrollCameraOntoNode(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s16 xEnd;
     s16 yEnd;
 
@@ -145,11 +169,25 @@ u8 Event87_WmScrollCameraOntoNode(struct EventEngineProc * proc)
     StartGmScroll(xStart, yStart, xEnd, yEnd, speed, delay);
 
     return EVC_ADVANCE_YIELD;
+#endif
 }
 
 //! FE8U = 0x0800BFD8
 u8 Event88_WmScrollCameraOntoUnit(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\n");
+#else
     s16 xEnd;
     s16 yEnd;
 
@@ -175,6 +213,7 @@ u8 Event88_WmScrollCameraOntoUnit(struct EventEngineProc * proc)
     StartGmScroll(xStart, yStart, xEnd, yEnd, speed, delay);
 
     return EVC_ADVANCE_YIELD;
+#endif
 }
 
 //! FE8U = 0x0800C084
@@ -652,6 +691,12 @@ u8 EventA6_WmUnitSetOnNode(struct EventEngineProc * proc)
 //! FE8U = 0x0800C68C
 u8 EventA7_WmUnitSetPosition(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#else
     struct WorldMapMainProc * worldMapProc;
 
     s16 index = EVT_CMD_ARGV(proc->pEventCurrent)[1];
@@ -661,6 +706,7 @@ u8 EventA7_WmUnitSetPosition(struct EventEngineProc * proc)
     GmMu_SetPosition(GM_MU, index, x, y);
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800C6C0
@@ -779,6 +825,12 @@ u8 EventAB_WmUnitResumeMove(struct EventEngineProc * proc)
 //! FE8U = 0x0800C814
 u8 EventAC_WmUnitMoveWait(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s16 unitId = EVT_CMD_ARGV(proc->pEventCurrent)[1];
 
     if (EVENT_IS_SKIPPING(proc))
@@ -797,6 +849,7 @@ u8 EventAC_WmUnitMoveWait(struct EventEngineProc * proc)
     }
 
     return EVC_STOP_YIELD;
+#endif
 }
 
 //! FE8U = 0x0800C85C
@@ -928,6 +981,12 @@ u8 EventB5_WmHideBigMap(struct EventEngineProc * proc)
 //! FE8U = 0x0800C9A0
 u8 EventB6_WmMoveBigMap(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u16 x1 = EVT_CMD_ARGV(proc->pEventCurrent)[1];
     u16 y1 = EVT_CMD_ARGV(proc->pEventCurrent)[2];
     u16 x2 = EVT_CMD_ARGV(proc->pEventCurrent)[3];
@@ -941,6 +1000,7 @@ u8 EventB6_WmMoveBigMap(struct EventEngineProc * proc)
     }
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800C9F0
@@ -1033,6 +1093,15 @@ u8 EventBB_(struct EventEngineProc * proc)
 //! FE8U = 0x0800CADC
 u8 EventBC_MarkPoint(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\n");
+#else
     s16 a = EVT_CMD_ARGV(proc->pEventCurrent)[1];
     s16 pal = EVT_CMD_ARGV(proc->pEventCurrent)[2];
     s16 nodeId = EVT_CMD_ARGV(proc->pEventCurrent)[3];
@@ -1048,6 +1117,7 @@ u8 EventBC_MarkPoint(struct EventEngineProc * proc)
     }
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800CB48
@@ -1170,6 +1240,11 @@ u8 EventCF_(struct EventEngineProc * proc)
 //! FE8U = 0x0800CC8C
 u8 EventC4_WmShowPortrait(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s16 face_slot = EVT_CMD_ARGV(proc->pEventCurrent)[1];
     s16 fid = EVT_CMD_ARGV(proc->pEventCurrent)[2];
     s16 config = EVT_CMD_ARGV(proc->pEventCurrent)[3];
@@ -1190,6 +1265,7 @@ u8 EventC4_WmShowPortrait(struct EventEngineProc * proc)
     }
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800CCE8

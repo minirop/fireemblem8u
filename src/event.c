@@ -495,6 +495,12 @@ void SlotQueuePush(unsigned value) {
 }
 
 unsigned SlotQueuePop(void) {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#else
     s16 i;
     unsigned result;
 
@@ -506,6 +512,7 @@ unsigned SlotQueuePop(void) {
         gEventSlotQueue[i] = gEventSlotQueue[i+1];
 
     return result;
+#endif
 }
 
 void SetEventSlotCounter(unsigned value) {

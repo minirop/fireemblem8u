@@ -261,8 +261,13 @@ void sub_800BA04(u8, u8);
 void sub_800BA34(void);
 void SetSomeRealCamPos(int x, int y, s8 unk);
 void EventSetFogVisionExt(s16, s8, ProcPtr);
+#ifdef EUROPE
+void TriggerMapChanges(u16 mapChangeId, int displayFlag, ProcPtr parent);
+void UntriggerMapChange(u16 mapChangeId, int displayFlag, ProcPtr parent);
+#else
 void TriggerMapChanges(u16 mapChangeId, s8 displayFlag, ProcPtr parent);
 void UntriggerMapChange(u16 mapChangeId, s8 displayFlag, ProcPtr parent);
+#endif
 void ResetBkselPalette(void);
 void ResetBkselPalette(void);
 s8 GetAllyUnitCount(u16 pid);

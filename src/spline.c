@@ -227,6 +227,15 @@ void sub_800A7D8(struct UnkSplineStruct1 * arg_0, struct UnkSplineStruct3 * arg_
 //! FE8U = 0x0800A8D8
 int sub_800A8D8(s16 * arg_0, s16 arg_1, int * arg_2, int * arg_3)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     int r2;
     int r3;
 
@@ -263,4 +272,5 @@ int sub_800A8D8(s16 * arg_0, s16 arg_1, int * arg_2, int * arg_3)
     *arg_3 = r3;
 
     return 0;
+#endif
 }

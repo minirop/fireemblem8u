@@ -51,6 +51,19 @@ u8 Event00_NULL(struct EventEngineProc * proc)
 //! FE8U = 0x0800D5A4
 u8 Event01_End(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s8 i;
     u16 flag;
 
@@ -103,11 +116,21 @@ u8 Event01_End(struct EventEngineProc * proc)
     }
 
     return EVC_END;
+#endif
 }
 
 //! FE8U = 0x0800D670
 u8 Event02_EvBitAndIdMod(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\n");
+#else
     int sub_cmd_lo = EVT_SUB_CMD_LO(proc->pEventCurrent);
     int sub_cmd_hi = EVT_SUB_CMD_HI(proc->pEventCurrent);
     u16 arg = EVT_CMD_ARGV(proc->pEventCurrent)[0];
@@ -133,11 +156,20 @@ u8 Event02_EvBitAndIdMod(struct EventEngineProc * proc)
     }
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800D6E4
 u8 Event03_CheckEvBitOrId(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     int sub_cmd = EVT_SUB_CMD(proc->pEventCurrent);
     u16 arg = EVT_CMD_ARGV(proc->pEventCurrent)[0];
     s16 bitck, tst;
@@ -163,6 +195,7 @@ u8 Event03_CheckEvBitOrId(struct EventEngineProc * proc)
     }
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800D754
@@ -303,6 +336,13 @@ u8 Event09_Goto(struct EventEngineProc * proc)
 //! FE8U = 0x0800D9B8
 u8 Event0A_Call(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s8 i;
     int dst = EVT_CMD_ARG32_BE(proc->pEventCurrent);
 
@@ -321,6 +361,7 @@ u8 Event0A_Call(struct EventEngineProc * proc)
     proc->pEventIdk = (const u16 *)dst;
     proc->pEventCurrent = (const u16 *)dst;
     return EVC_UNK4;
+#endif
 }
 
 //! FE8U = 0x0800DA2C
@@ -407,6 +448,13 @@ u8 Event0C_Branch(struct EventEngineProc * proc)
 //! FE8U = 0x0800DB00
 u8 Event0D_AsmCall(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u32 _cmd_mask;
     u8 _cmd;
     void (*func)(struct EventEngineProc *);
@@ -421,11 +469,24 @@ u8 Event0D_AsmCall(struct EventEngineProc * proc)
 
     func(proc);
     return EVC_ADVANCE_YIELD;
+#endif
 }
 
 //! FE8U = 0x0800DB38
 u8 Event0E_STAL(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u8 subcode;
     s16 stallTimer;
 
@@ -468,12 +529,26 @@ u8 Event0E_STAL(struct EventEngineProc * proc)
     }
 
     return EVC_STOP_YIELD;
+#endif
 }
 
 // Counter Operations
 //! FE8U = 0x0800DBE0
 u8 Event0F_CounterOps(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     do
     {
         s8 newValue;
@@ -518,6 +593,7 @@ u8 Event0F_CounterOps(struct EventEngineProc * proc)
     } while (0);
 
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800DC98
@@ -584,6 +660,11 @@ u8 Event11_SetIgnoredKeys(struct EventEngineProc * proc)
 
 u8 Event12_StartBGM(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     s16 evArgument;
 
     if (EVENT_IS_SKIPPING(proc))
@@ -596,10 +677,18 @@ u8 Event12_StartBGM(struct EventEngineProc * proc)
 
     StartBgmExt(evArgument, 3, NULL);
     return EVC_ADVANCE_YIELD;
+#endif
 }
 
 u8 Event13_BgmFadeIn(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u8 subcode = EVT_SUB_CMD(proc->pEventCurrent);
     s16 evArgument = EVT_CMD_ARGV(proc->pEventCurrent)[0];
 
@@ -622,6 +711,7 @@ u8 Event13_BgmFadeIn(struct EventEngineProc * proc)
         Sound_FadeOutBGM(subcode);
         return EVC_ADVANCE_YIELD;
     }
+#endif
 }
 
 //! FE8U = 0x0800DE14
@@ -757,6 +847,11 @@ u8 Event18_ColorFade(struct EventEngineProc * proc)
     u16 g = proc->pEventCurrent[4];
     u16 b = proc->pEventCurrent[5];
 
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#endif
+
     switch (subcode) {
     case EVSUBCMD_STARTFADE:
         EventStartFade();
@@ -843,7 +938,11 @@ u8 Event19_Checks(struct EventEngineProc * proc)
         break;
 
     case EVSUBCMD_19CHECK_EVENTID: // Check Event Trigger ID
+#ifdef EUROPE
+        asm("nop\n");
+#else
         gEventSlots[0xC] = GetEventTriggerId(proc->pEventStart);
+#endif
         break;
 
     case EVSUBCMD_CHECK_POSTGAME: // Check Game Complete
@@ -877,6 +976,9 @@ u8 Event1A_TEXTSTART(struct EventEngineProc * proc)
 
         sub_800E640(proc);
     }
+#ifdef EUROPE
+        asm("nop\n");
+#endif
 
     proc->activeTextType = subcode;
 
@@ -997,6 +1099,10 @@ u8 Event1B_TEXTSHOW(struct EventEngineProc * proc)
         if (evArgument == 0)
             return EVC_ADVANCE_CONTINUE;
     }
+
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#endif
 
     switch (subcode)
     {
@@ -1229,6 +1335,20 @@ struct ProcCmd CONST_DATA gUnknown_08591DE8[] =
 //! FE8U = 0x0800E6B4
 u8 Event1E_(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+#else
     u8 subcode = EVT_SUB_CMD(proc->pEventCurrent);
     s16 evArgument = EVT_CMD_ARGV(proc->pEventCurrent)[0];
 
@@ -1278,11 +1398,19 @@ u8 Event1E_(struct EventEngineProc * proc)
 
     StartTalk(0, 0, gUnknown_03000428.str);
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800E77C
 u8 Event1F_(struct EventEngineProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\n");
+#else
     u8 evX;
     u8 evY;
 
@@ -1302,6 +1430,7 @@ u8 Event1F_(struct EventEngineProc * proc)
 
     StartTalk(0, 0, gUnknown_03000430);
     return EVC_ADVANCE_CONTINUE;
+#endif
 }
 
 //! FE8U = 0x0800E7C4
@@ -1383,6 +1512,10 @@ u8 Event21_TextBg(struct EventEngineProc * proc)
 
     int subcode = EVT_SUB_CMD(proc->pEventCurrent);
     s16 evArgument = EVT_CMD_ARGV(proc->pEventCurrent)[0];
+
+#ifdef EUROPE
+    asm("nop\nnop\n");
+#endif
 
     if (evArgument < 0)
         evArgument = gEventSlots[2];
@@ -1563,12 +1696,20 @@ void sub_800EBB0(struct ConvoBackgroundFadeProc * proc)
 //! FE8U = 0x0800EC00
 void sub_800EC00(struct ConvoBackgroundFadeProc * proc)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#else
     CopyBgImage(2, 3, 10);
     CopyBgTiles(BG_2, BG_3, 1);
     CopyBgPalette(0, 8, 6);
     BgChangeChr(BG_3, 8);
 
     SetDispEnable(FALSE, FALSE, TRUE, TRUE, TRUE);
+#endif
 }
 
 //! FE8U = 0x0800EC50
@@ -1621,6 +1762,10 @@ void sub_800EC50(struct ConvoBackgroundFadeProc * proc)
     }
 
     SetDispEnable(FALSE, FALSE, TRUE, TRUE, TRUE);
+
+#ifdef EUROPE
+    asm("nop\nnop\n");
+#endif
 }
 
 //! FE8U = 0x0800ED50
