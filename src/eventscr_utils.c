@@ -126,7 +126,11 @@ void EventSetFogVisionExt(s16 visionRange, s8 flag, ProcPtr parent)
 }
 
 //! FE8U = 0x0800BAF8
+#ifdef EUROPE
+void TriggerMapChanges(u16 id, int flag, ProcPtr parent)
+#else
 void TriggerMapChanges(u16 id, s8 flag, ProcPtr parent)
+#endif
 {
     if (IsMapChangeEnabled(id))
         return;
@@ -143,10 +147,16 @@ void TriggerMapChanges(u16 id, s8 flag, ProcPtr parent)
 
     if (flag == 1)
         MakeNew6CBMXFADE2(1, parent);
+
+    asm("nop\nnop\n");
 }
 
 //! FE8U = 0x0800BB48
+#ifdef EUROPE
+void UntriggerMapChange(u16 id, int flag, ProcPtr parent)
+#else
 void UntriggerMapChange(u16 id, s8 flag, ProcPtr parent)
+#endif
 {
     if (IsMapChangeEnabled(id) != 1)
         return;
@@ -163,6 +173,8 @@ void UntriggerMapChange(u16 id, s8 flag, ProcPtr parent)
 
     if (flag == 1)
         MakeNew6CBMXFADE2(1, parent);
+
+    asm("nop\nnop\n");
 }
 
 //! FE8U = 0x0800BB98
