@@ -19,6 +19,31 @@ const char *gStrPrefix[][2] =
 
 const char * GetStrPrefix(s8 * str, bool capital)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\n");
+#else
     switch (str[0])
     {
     case 'A':
@@ -35,6 +60,7 @@ const char * GetStrPrefix(s8 * str, bool capital)
     default:
         return gStrPrefix[0][capital];
     }
+#endif
 }
 
 void InsertPrefix(char * str, const char * prefix, bool capital)
@@ -54,10 +80,24 @@ void InsertPrefix(char * str, const char * prefix, bool capital)
 
     for (i = 0; i < len_prefix; i++)
         str[i] = _prefix[i];
+
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+#endif
 }
 
 void SetMsgTerminator(signed char * str)
 {
+#ifdef EUROPE
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\n");
+#else
     short off = 0;
     u8 ch;
 
@@ -86,10 +126,40 @@ void SetMsgTerminator(signed char * str)
 
         off--;
     }
+#endif
 }
+
+#ifdef EUROPE
+void FUN_0800a28c()
+{
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\n");
+}
+
+void FUN_0800a2b4()
+{
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\nnop\nnop\n");
+    asm("nop\nnop\nnop\n");
+}
+#endif
 
 char * GetStringFromIndex(int index)
 {
+#ifdef EUROPE
+    asm("nop\nnop\n");
+#endif
     if (index == sActiveMsg)
         return sMsgString.buffer1;
     CallARM_DecompText(gMsgTable[index], sMsgString.buffer1);
@@ -100,6 +170,9 @@ char * GetStringFromIndex(int index)
 
 char * GetStringFromIndexInBuffer(int index, char *buffer)
 {
+#ifdef EUROPE
+    asm("nop\nnop\n");
+#endif
     CallARM_DecompText(gMsgTable[index], buffer);
     SetMsgTerminator(buffer);
     return buffer;
