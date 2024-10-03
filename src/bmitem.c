@@ -82,12 +82,11 @@ char* GetItemNameWithArticle(int item, s8 capitalize) {
     } // switch (GetItemIndex(item))
 }
 
+#ifndef EUROPE
 inline const struct ItemData* GetItemData(int itemIndex) {
-#ifdef EUROPE
-    // asm("NOP\n");
-#endif
     return gItemData + itemIndex;
 }
+#endif
 
 inline int GetItemIndex(int item) {
     return ITEM_INDEX(item);
@@ -239,7 +238,8 @@ int GetItemHpBonus(int item) {
     asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
     asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
     asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
 #endif
     if (!item)
         return 0;
@@ -254,6 +254,9 @@ int GetItemHpBonus(int item) {
 }
 
 int GetItemPowBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -267,6 +270,9 @@ int GetItemPowBonus(int item) {
 }
 
 int GetItemSklBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -280,6 +286,9 @@ int GetItemSklBonus(int item) {
 }
 
 int GetItemSpdBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -293,6 +302,9 @@ int GetItemSpdBonus(int item) {
 }
 
 int GetItemDefBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -306,6 +318,9 @@ int GetItemDefBonus(int item) {
 }
 
 int GetItemResBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -319,6 +334,9 @@ int GetItemResBonus(int item) {
 }
 
 int GetItemLckBonus(int item) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (!item)
         return 0;
     else {
@@ -334,8 +352,12 @@ int GetItemLckBonus(int item) {
 int MakeNewItem(int item) {
     int uses = GetItemMaxUses(item);
 
+#ifdef EUROPE
+//    asm("NOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (GetItemAttributes(item) & IA_UNBREAKABLE)
         uses = 0;
+#endif
 
     return (uses << 8) + GetItemIndex(item);
 }
@@ -385,9 +407,9 @@ s8 CanUnitUseWeapon(struct Unit* unit, int item) {
         return FALSE;
 
 #ifdef EUROPE
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
 #endif
     {
         int wRank = GetItemRequiredExp(item);
@@ -1070,3 +1092,38 @@ void SetItemUnsealedForCharacter(int item, u8 unk) {
 s8 IsItemUnsealedForUnit(struct Unit* unit, int item) {
     return (GetChapterUnk1C(GetItemType(item)) == unit->pCharacterData->number) ? TRUE : FALSE;
 }
+
+#ifdef EUROPE
+inline const struct ItemData* GetItemData(int itemIndex) {
+    const struct ItemData* ptr;
+    switch (GetLang())
+    {
+    case 0:
+        ptr = gItemData + itemIndex * 0x24;
+        break;
+    case 1:
+        ptr = gItemData + itemIndex * 0x24 + 1;
+        break;
+    case 2:
+        ptr = gItemData + itemIndex * 0x24 + 2;
+        break;
+    case 3:
+        ptr = gItemData + itemIndex * 0x24 + 3;
+        break;
+    case 4:
+        ptr = gItemData + itemIndex * 0x24 + 4;
+        break;
+    default:
+        ptr = 0;
+        break;
+    };
+
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+
+    return ptr;
+}
+#endif
