@@ -92,7 +92,9 @@ void MatRotA(int * mat, short angle)
 
     mat[6] = 0;
     mat[7] = +sin;
+#ifndef EUROPE
     mat[8] = +cos;
+#endif
 }
 
 void MatRotB(int * mat, short angle)

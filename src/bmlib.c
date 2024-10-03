@@ -1751,6 +1751,10 @@ void sub_8014804(u16 * tm, int x, int y, u32 const * arg_3, u16 tileref)
             }
         }
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void CallDelayed_OnLoop(struct CallDelayedProc * proc)

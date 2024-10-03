@@ -572,7 +572,9 @@ void LoadObjUIGfx(void) {
     Copy2dChr(gGenericBuffer, (void*)0x06010000, 0x12, 4);
 
     ApplyPalettes(gPal_MiscUiGraphics, 0x10, 2);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -948,9 +950,10 @@ void CamMove_OnInit(struct CamMoveProc* proc) {
         i++;
     }
 
+#ifndef EUROPE
     proc->frame = i;
     proc->distance = proc->calibration;
-
+#endif
     return;
 }
 
