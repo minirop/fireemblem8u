@@ -479,6 +479,11 @@ void NewPopup_ItemGot_unused(struct Unit* unit, u16 item, ProcPtr parent)
         NewPopup_Simple(PopupScr_GotItem, 0x60, 0x0, parent);
     else
         NewPopup_Simple(PopupScr_ItemWasPilfered, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void ItemGot_DisplayLePopup(struct GotItemPopupProc * proc)
@@ -536,6 +541,11 @@ void NewGoldNumPopup_unused(u32 num, ProcPtr parent)  /* unused */
         NewPopup_Simple(PopupScr_GotGold, 0x60, 0x0, parent);
     else
         NewPopup_Simple(PopupScr_GoldWasStole, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void NewNumberPopup_unused(u32 num, ProcPtr parent)  /* unused */
@@ -554,6 +564,10 @@ void NewPopup_GoldGot(ProcPtr parent, struct Unit *unit, int value)
         NewPopup_Simple(PopupScr_GotGold, 0x60, 0x0, parent);
     } else
         NewPopup_Simple(PopupScr_GoldWasStole, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewPopup_ItemStealing(u16 item, ProcPtr parent)
@@ -564,12 +578,20 @@ void NewPopup_ItemStealing(u16 item, ProcPtr parent)
         NewPopup_Simple(PopupScr_StoleItem, 0x60, 0x0, parent);
     else
         NewPopup_Simple(PopupScr_ItemStolen, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewPopup_WeaponBroke(u16 item, ProcPtr parent)
 {
     SetPopupItem(item);
     NewPopup_Simple(PopupScr_WpnBroken, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewPopup_WRankIncrease(u16 item, ProcPtr parent)
@@ -583,6 +605,10 @@ void NewPopup_NewAlly(ProcPtr parent, u8 char_id)
 {
     SetPopupUnit(GetUnitFromCharId(char_id));
     NewPopup_Simple(PopupScr_NewAlly, 0x60, 0x0, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewPopup_VerySimple(u32 msg, u32 sound_index, ProcPtr parent)
@@ -675,14 +701,17 @@ void sub_8011A1C(struct BrownTextBoxProc * proc, s8 doBlend)
     {
         return;
     }
-
     if (doBlend)
     {
         proc->oam0Attr = OAM0_BLEND;
     }
     else
     {
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         proc->oam0Attr = 0;
+#endif
     }
 }
 
