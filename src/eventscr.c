@@ -3131,10 +3131,11 @@ u8 Event2F_MoveUnit(struct EventEngineProc * proc)
     s8 yOut;
     void * queue;
 
+#ifndef EUROPE
     subcmd = EVT_SUB_CMD_LO(proc->pEventCurrent);
     subHi = EVT_SUB_CMD_HI(proc->pEventCurrent);
-
     speed = EVT_CMD_ARGV(proc->pEventCurrent)[0];
+#endif
 
     unit = GetUnitStructFromEventParameter(EVT_CMD_ARGV(proc->pEventCurrent)[1]);
     if (!unit)
@@ -3142,8 +3143,10 @@ u8 Event2F_MoveUnit(struct EventEngineProc * proc)
         return EVC_ADVANCE_CONTINUE;
     }
 
+#ifndef EUROPE
     xIn = unit->xPos;
     yIn = unit->yPos;
+#endif
 
     if (!(unit->state & US_BIT22))
     {
@@ -3252,8 +3255,10 @@ u8 Event30_ENUN(struct EventEngineProc * proc)
         return EVC_STOP_YIELD;
     }
 
+#ifndef EUROPE
     RefreshEntityBmMaps();
     RefreshUnitSprites();
+#endif
     RenderBmMap();
     BmMapFill(gBmMapOther, 0);
 
@@ -3344,10 +3349,10 @@ u8 Event32_SpawnSingleUnit(struct EventEngineProc * proc)
     unitDef.unk_05_7 = 0;
     unitDef.extraData = 0;
 
+#ifndef EUROPE
     unitDef.redaCount = 0;
-
     unitDef.redas = NULL;
-
+#endif
     unitDef.items[0] = 0;
     unitDef.items[1] = 0;
     unitDef.items[2] = 0;
@@ -3469,8 +3474,17 @@ u8 Event33_CheckUnitVarious(struct EventEngineProc * proc)
     case EVSUBCMD_CHECK_LUCK:
         if (!unit)
             return EVC_ERROR;
-
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         gEventSlots[0xC] = GetUnitLuck(unit);
+#endif
 
         break;
     }
@@ -3696,6 +3710,10 @@ u8 Event35_UnitClassChanging(struct EventEngineProc * proc)
     RefreshUnitSprites();
     RenderBmMap();
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
+
     return EVC_ADVANCE_CONTINUE;
 }
 
@@ -3709,10 +3727,13 @@ u8 Event36_CheckInArea(struct EventEngineProc * param_1)
 
     pid = EVT_CMD_ARGV(param_1->pEventCurrent)[0];
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     x1 = EVT_CMD_ARGV(param_1->pEventCurrent)[1];
     y1 = EVT_CMD_ARGV(param_1->pEventCurrent)[1] >> 8;
-
     x2 = x1 + ((u16 *)EVT_CMD_ARGV(param_1->pEventCurrent))[2] - 1;
+#endif
     y2 = y1 + (((u16 *)EVT_CMD_ARGV(param_1->pEventCurrent))[2] >> 8) - 1;
 
     unit = GetUnitStructFromEventParameter(pid);
@@ -3818,13 +3839,16 @@ u8 Event39_ChangeAiScript(struct EventEngineProc * proc)
             x = ((u16 *)(gEventSlots + 0xB))[0];
             y = ((u16 *)(gEventSlots + 0xB))[1];
         }
-
         if (gBmMapUnit[y][x] != 0)
             unit = GetUnit(gBmMapUnit[y][x]);
         else
             unit = NULL;
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\n");
+#else
         ChangeUnitAi(unit, ai1, ai2, unused);
+#endif
 
         break;
     }
@@ -3856,7 +3880,11 @@ u8 Event3A_DisplayPopup(struct EventEngineProc * proc)
     case 0:
     {
         u16 songId = EVT_CMD_ARGV(proc->pEventCurrent)[1];
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\n");
+#else
         NewPopup_VerySimple(textId, songId, proc);
+#endif
         break;
     }
 
@@ -3960,8 +3988,9 @@ u8 Event3B_DisplayCursor(struct EventEngineProc * proc)
     childProc->x = x;
     childProc->y = y;
     childProc->subcmd = subcmd;
+#ifndef EUROPE
     childProc->timer = 0;
-
+#endif
     return EVC_ADVANCE_CONTINUE;
 }
 
@@ -4151,7 +4180,11 @@ u8 Event3F_ScriptBattle(struct EventEngineProc * proc)
         if (charIdB < 0)
             charIdB = -2;
 
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         unitA = GetUnitStructFromEventParameter(charIdA);
+#endif
         unitB = GetUnitStructFromEventParameter(charIdB);
 
         if (EVENT_IS_SKIPPING(proc) || (proc->evStateBits & EV_STATE_FADEDIN))
@@ -4226,7 +4259,11 @@ u8 Event40_PromoteUnit(struct EventEngineProc * proc)
     Proc_SetMark(proc, PROC_MARK_EVENT_ANIM);
 
     unit = GetUnitStructFromEventParameter(pid);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     SetUnitStatus(unit, 0);
+#endif
     EventPromoteUnitExt(unit, jid, itemId);
 
     return EVC_ADVANCE_YIELD;
@@ -4250,6 +4287,9 @@ u8 Event41_Warp(struct EventEngineProc * proc)
     {
         case EVSUBCMD_WARP_OUT:
         case EVSUBCMD_WARP_IN:
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
             x = EVT_CMD_ARGV(proc->pEventCurrent)[0];
             y = EVT_CMD_ARGV(proc->pEventCurrent)[0];
 
@@ -4258,6 +4298,7 @@ u8 Event41_Warp(struct EventEngineProc * proc)
                 x = ((u16 *)(gEventSlots + 0xB))[0];
                 y = ((u16 *)(gEventSlots + 0xB))[1];
             }
+#endif
 
             if (!(proc->evStateBits & EV_STATE_0040))
             {
@@ -4278,7 +4319,6 @@ u8 Event41_Warp(struct EventEngineProc * proc)
 
             break;
     }
-
     return EVC_ADVANCE_YIELD;
 }
 
