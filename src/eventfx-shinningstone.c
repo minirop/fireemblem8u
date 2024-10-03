@@ -80,7 +80,11 @@ void NewShinningStonefx(struct Unit * unit)
     proc = Proc_Start(ProcScr_ShinningStonefx, PROC_TREE_3);
 
     proc->x = SCREEN_TILE_IX(x) + 8;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     proc->y = SCREEN_TILE_IY(y);
+#endif
 }
 
 bool CheckShinningStonefxExists(void)
