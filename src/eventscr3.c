@@ -106,8 +106,12 @@ void ChangeAiForPositions(struct Vec2 * posArray, u8 length, u8 ai1, u8 ai2, u8 
             {
                 continue;
             }
-
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
             ChangeUnitAi(unit, ai1, ai2, unused);
+#endif
         }
     }
 
@@ -326,8 +330,10 @@ void StartEventBattle(struct Unit * unitA, struct Unit * unitB, u8 isBallista, s
     }
     else
     {
+#ifndef EUROPE
         UnitBeginAction(unitA);
         HideUnitSprite(gActiveUnit);
+#endif
         StartMu(gActiveUnit);
         SetAutoMuDefaultFacing();
 
@@ -535,14 +541,16 @@ void sub_801247C(struct Unit * unit)
     s8 y;
 
     const struct UnitDefinition * uDef = GetChapterAllyUnitDataPointer();
-
     if (UNIT_CATTRIBUTES(unit) & CA_SUPPLY)
     {
         unit->xPos = GetROMChapterStruct(gPlaySt.chapterIndex)->merchantPosX;
+#ifdef EUROPE
+        asm("NOP\n");
+#else
         unit->yPos = GetROMChapterStruct(gPlaySt.chapterIndex)->merchantPosY;
+#endif
         return;
     }
-
     while (uDef->charIndex != 0)
     {
         s8 found = 0;
