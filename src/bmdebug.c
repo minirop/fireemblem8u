@@ -371,7 +371,9 @@ int DebugMenu_ClearDraw(struct MenuProc* menuProc, struct MenuItemProc* menuItem
     Text_InsertDrawString(&menuItemProc->text, 72, TEXT_COLOR_SYSTEM_BLUE, GetStringFromIndex(0x6b8)); // TODO: msgid "Clears"
     Text_InsertDrawNumberOrBlank(&menuItemProc->text, 64, TEXT_COLOR_SYSTEM_BLUE, GetGlobalCompletionCount() + 1);
     PutText(&menuItemProc->text, gBG0TilemapBuffer + TILEMAP_INDEX(menuItemProc->xTile, menuItemProc->yTile));
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return 0;
 }
 
@@ -559,7 +561,9 @@ u8 StartupDebugMenu_ChapterSelectEffect(struct MenuProc* menuProc, struct MenuIt
     WriteGameSave(SAVE_ID_GAME0);
 
     ChapterChangeUnitCleanup();
+#ifndef EUROPE
     nullsub_9();
+#endif
 
     return 2;
 }
