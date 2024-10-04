@@ -32,7 +32,10 @@ void GenerateUnitMovementMap(struct Unit* unit)
 void GenerateUnitMovementMapExt(struct Unit* unit, s8 movement)
 {
     SetWorkingMoveCosts(GetUnitMovementCost(unit));
+#ifdef EUROPE
+#else
     SetWorkingBmMap(gBmMapMovement);
+#endif
 
     GenerateMovementMap(unit->xPos, unit->yPos, movement, unit->index);
 }
@@ -136,10 +139,10 @@ void sub_801A570(int connexion, int x, int y)
     gMovMapFillState.dst->xPos = x;
     gMovMapFillState.dst->yPos = y;
     gMovMapFillState.dst->connexion = connexion;
+#ifndef EUROPE
     gMovMapFillState.dst->leastMoveCost = tileMovementCost;
-
     gMovMapFillState.dst++;
-
+#endif
     gWorkingBmMap[y][x] = tileMovementCost;
 }
 
@@ -256,6 +259,11 @@ void GenerateBestMovementScript(int x, int y, u8 output[])
 
         } // switch (nextDirection)
     }
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 
     // reverse and terminate output
     RevertMovementScript(outputStart, output);
