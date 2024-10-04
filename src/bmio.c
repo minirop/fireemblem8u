@@ -291,7 +291,11 @@ void BMapVSync_Start(void) {
         Proc_Start(sProc_BMVSync, PROC_TREE_VSYNC));
 
     WfxInit();
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     gBmSt.gameGfxSemaphore = 0;
+#endif
 }
 
 void BMapVSync_End(void) {
@@ -958,7 +962,11 @@ void InitPlayConfig(int isDifficult, s8 unk) {
     gPlaySt.config.debugControlRed = 0;
     gPlaySt.config.debugControlGreen = 0;
     gPlaySt.config.unitColor = 0;
+#ifdef EUROPE
+    // asm("NOP\nNOP\n");
+#else
     gPlaySt.config.unk41_5 = 0;
+#endif
 }
 
 void ClearBattleMapState(void) {
@@ -1356,6 +1364,16 @@ void GameCtrl_DeclareCompletedChapter(void) {
     SaveEndgameRankings();
 
     gPlaySt.chapterStateBits |= PLAY_FLAG_COMPLETE;
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void GameCtrl_SavePlayThroughData(void)
