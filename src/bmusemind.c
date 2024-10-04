@@ -799,7 +799,9 @@ void ExecJunaFruitItem(ProcPtr proc) {
     PlaySoundEffect(0x5A);
 
     NewPopup2_PlanB(proc, GetItemIconId(itemId), 0, levelCount, GetStringFromIndex(0x1E));
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
