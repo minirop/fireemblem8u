@@ -45,7 +45,11 @@ void bmxfade_loop(struct BmxfadeProc *proc)
     if (--proc->counter >= 0)
         return;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     Proc_Break(proc);
+#endif
     SetDefaultColorEffects();
     SetBackgroundTileDataOffset(2, 0);
     BG_Fill(gBG2TilemapBuffer, 0);
@@ -63,7 +67,11 @@ void Destruct6CBMXFADE(struct BmxfadeProc *proc)
 void NewBMXFADE(s8 lock_game)
 {
     struct BmxfadeProc *proc = Proc_Start(sProcScr_BMXFADE, PROC_TREE_3);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     proc->game_lock = lock_game;
+#endif
 
     if (0 != lock_game)
         LockGame();
@@ -73,8 +81,11 @@ void MakeNew6CBMXFADE2(s8 lock_game, ProcPtr parent)
 {
     struct BmxfadeProc *proc = 
         Proc_StartBlocking(sProcScr_BMXFADE, parent);
-    
+   #ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else 
     proc->game_lock = lock_game;
+#endif
 
     if (0 != lock_game)
         LockGame();
