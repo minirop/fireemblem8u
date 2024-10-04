@@ -35,8 +35,12 @@ void CutOffPathLength(s8 newIndex) {
     if (gpPathArrowProc->pathLen >= newIndex) {
         s8 i;
         gpPathArrowProc->pathLen = newIndex - 1;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         gpPathArrowProc->pathCosts[gpPathArrowProc->pathLen] =
             gpPathArrowProc->maxMov;
+#endif
         for (i = 1; i <= gpPathArrowProc->pathLen; i++) {
             u8 *costs = GetWorkingMoveCosts();
             gpPathArrowProc->pathCosts[i] =
@@ -51,8 +55,13 @@ void CutOffPathLength(s8 newIndex) {
 void AddPointToPathArrowProc(s8 x, s8 y) {
     u8 * costs;
     gpPathArrowProc->pathLen++;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     gpPathArrowProc->pathX[gpPathArrowProc->pathLen] = x;
     gpPathArrowProc->pathY[gpPathArrowProc->pathLen] = y;
+#endif
     costs = GetWorkingMoveCosts();
     gpPathArrowProc->pathCosts[gpPathArrowProc->pathLen] =
         gpPathArrowProc->pathCosts[gpPathArrowProc->pathLen - 1] -
@@ -61,15 +70,30 @@ void AddPointToPathArrowProc(s8 x, s8 y) {
 
 s32 GetPointAlongPath(s8 x, s8 y) {
     s8 i;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     for (i = 0; i <= gpPathArrowProc->pathLen; i++) {
         if (gpPathArrowProc->pathX[i] == x && gpPathArrowProc->pathY[i] == y)
             return i;
     }
+#endif
     return -1;
 }
 
 void GetPathFromMovementScript(void) {
     s8 i = 0;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     while (TRUE) {
         // I do not know what these +1s are about. but they are necessary to
         // the match as far as I can tell.  maybe I'm supposed to use another
@@ -79,6 +103,8 @@ void GetPathFromMovementScript(void) {
         if (cmd <= 0xa) {
             switch (cmd) {
 
+#ifdef EUROPE
+#else
             case MOVE_CMD_END + 1:
             case MOVE_CMD_HALT + 1:
                 return;
@@ -88,6 +114,7 @@ void GetPathFromMovementScript(void) {
             case MOVE_CMD_FACE_UP + 1:
             case MOVE_CMD_SLEEP + 1:
                 continue;
+#endif
             case MOVE_CMD_MOVE_LEFT + 1:
                 AddPointToPathArrowProc(
                     gpPathArrowProc->pathX[gpPathArrowProc->pathLen] - 1,
@@ -138,7 +165,11 @@ void GetMovementScriptFromPath(void) {
             gWorkingMovementScript[i - 1] = MOVE_CMD_MOVE_DOWN;
         }
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     gWorkingMovementScript[i - 1] = MOVE_CMD_HALT;
+#endif
 }
 
 void GenerateMovementMapForActiveUnit(void) {
@@ -160,6 +191,17 @@ void ResetPathArrow(void) {
 }
 
 bool8 PathContainsNoCycle(void) {
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     s8 i, j;
     for (i = gpPathArrowProc->pathLen; i > 0; --i) {
         for (j = i - 1; j >= 0; --j) {
@@ -170,7 +212,7 @@ bool8 PathContainsNoCycle(void) {
             }
         }
     }
-
+#endif
     return 1;
 }
 
@@ -245,7 +287,10 @@ void UpdatePathArrowWithCursor(void) {
         gBmSt.playerCursor.x,
         gBmSt.playerCursor.y,
         gWorkingMovementScript);
+#ifdef EUROPE
+#else
     GetPathFromMovementScript();
+#endif
     if (!PathContainsNoCycle())
         ResetPathArrow();
 }
@@ -277,6 +322,12 @@ u8 GetDirectionOfPathAfterIndex(u8 i) {
 }
 
 u8 PointInCameraBounds(s16 x, s16 y, u8 xBound, u8 yBound) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (y - gBmSt.camera.y > -yBound &&
 		y - gBmSt.camera.y <= 0x9f &&
 		x - gBmSt.camera.x > -xBound &&
@@ -284,6 +335,7 @@ u8 PointInCameraBounds(s16 x, s16 y, u8 xBound, u8 yBound) {
 	{
 		return 1;
 	}
+#endif
     return 0;
 }
 
