@@ -564,7 +564,11 @@ void SetupDungeonRecordUi(ProcPtr proc) {
     sub_80AB760(gUnknown_0200310C);
 
     CpuFastSet(PAL_BG(BGPAL_BMDIFFICULTY_UNK_0), PAL_OBJ(OBPAL_BMDIFFICULTY_UNK_5), 8);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -601,7 +605,10 @@ void DrawDungeonRecordUiLabels(struct Text* th) {
 
         iter++;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -632,6 +639,9 @@ struct Text* DrawNumberText(struct Text* th, u16 number, u8 places, s8 x, s8 y, 
         th++;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return th;
 }
 
@@ -1073,6 +1083,9 @@ void sub_8038F78(struct Text* th) {
         i++;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1132,6 +1145,12 @@ void sub_803901C(struct BMDifficultyProc * proc)
 
     PlaySoundEffect(0x80); // Point Up SE
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1154,6 +1173,8 @@ void sub_80390D4(struct BMDifficultyProc* proc) {
             0x5000
         );
     } else {
+#ifdef EUROPE
+#else
         if (proc->labelIndex == 4) {
             DrawTimeText_WithReset(
                 &gUnknown_020038C8[1].text[4][0],
@@ -1178,6 +1199,7 @@ void sub_80390D4(struct BMDifficultyProc* proc) {
         BG_EnableSyncByMask(1);
 
         Proc_Break(proc);
+#endif
     }
 
     return;

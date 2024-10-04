@@ -562,6 +562,9 @@ void PrepHelpPrompt_Init(struct ProcPrepSallyCursor * proc)
     StartHelpPromptSprite(170, 140, 2, proc);
     Decompress(Img_PrepHelpButtonSprites, (void *)(OBJ_VRAM1 + 0x3000));
     proc->unk_58 = 0;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -961,8 +964,11 @@ void PrepScreen_UnitSwapIdle(struct ProcPrepSallyCursor * proc)
     {
         r7 = 0;
     }
-
+#ifdef EUROPE
+    // asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     HandlePlayerCursorMovement();
+#endif
 
     xLoc = (proc->xCursor * 16) - gBmSt.camera.x;
     yLoc = (proc->yCursor * 16) - gBmSt.camera.y;
