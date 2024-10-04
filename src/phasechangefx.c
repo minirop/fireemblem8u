@@ -432,6 +432,10 @@ void PhaseIntro_InitGraphics(ProcPtr proc)
         break;
 
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void PhaseIntro_InitDisp(ProcPtr proc)

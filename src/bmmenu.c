@@ -938,9 +938,11 @@ int ItemSelectMenu_TextDraw(struct MenuProc* menu, struct MenuItemProc* menuItem
         isUsable,
         gBG0TilemapBuffer + TILEMAP_INDEX(menuItem->xTile, menuItem->yTile)
     );
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     BG_EnableSyncByMask(BG0_SYNC_BIT);
-
+#endif
     //return 0; BUG?
 }
 
@@ -1888,10 +1890,13 @@ u8 SummonCommandUsability(const struct MenuItemDef* def, int number) {
             break;
         }
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (summonerId == -1) {
         return MENU_NOTSHOWN;
     }
+#endif
 
     for (i = FACTION_BLUE + 1; i < FACTION_GREEN; i++) {
         struct Unit* unit = GetUnit(i);

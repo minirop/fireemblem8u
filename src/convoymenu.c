@@ -112,6 +112,9 @@ void HandleNewItemGetFromDrop(struct Unit* unit, int item, ProcPtr proc)
 
     SetTalkChoiceResult(TALK_CHOICE_NO);
     Proc_StartBlocking(gProcCmd_ConvoyMenu, proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 int SendToConvoyMenu_Draw(struct MenuProc* proc_menu, struct MenuItemProc* proc_cmd)

@@ -1052,11 +1052,13 @@ void PutUnitSpriteIconsOam(void)
     berserkIconFrame = GetGameClock() / 8 % ARRAY_COUNT(sBerserkIconSprites);
     silenceIconFrame = GetGameClock() / 4 % ARRAY_COUNT(sSilenceIconSprites);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (CheckFlag(EVFLAG_HIDE_BLINKING_ICON) != 0)
         return;
-
     PutChapterMarkedTileIconOam();
-
+#endif
     for (i = 1; i < 0xc0; i++)
     {
         struct Unit * unit = GetUnit(i);

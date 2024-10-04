@@ -268,10 +268,20 @@ void NewPopup2_PlanD(ProcPtr parent, int item, int msg0, int msg1)
         TILEREF(0, 0x4)
     );
     Proc_StartBlocking(ProcScr_Popup2, parent);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void NewPopup2_DropItem(ProcPtr parent, int item)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     NewPopup2_PlanD(parent, item,
         0x00F,        /* Dropped */
         0x022);      /* .[.] */
@@ -279,6 +289,11 @@ void NewPopup2_DropItem(ProcPtr parent, int item)
 
 void NewPopup2_SendItem(ProcPtr parent, int item)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     NewPopup2_PlanD(parent, item,
     0x010,           /* Sent [.] */
     0x011);          /* .[.] */

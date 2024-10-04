@@ -724,8 +724,11 @@ void WarpSelect_OnIdle(struct WarpSelectProc* proc)
     AP_Update(proc->ap,
         gBmSt.playerCursorDisplay.x - gBmSt.camera.x,
         gBmSt.playerCursorDisplay.y - gBmSt.camera.y);
-
+#ifdef EUROPE
+//    asm("NOP\nNOP\n");
+#else
     proc->prevWarpAllowed = warpAllowed;
+#endif
 }
 
 void WarpSelect_OnConfirm(struct WarpSelectProc* proc)

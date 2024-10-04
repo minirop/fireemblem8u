@@ -187,6 +187,11 @@ void GameOverScreen_Init(struct ProcGameOverScreen *proc)
         CALLARM_ColorFadeTick();
 
     EnablePaletteSync();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void GameOverScreen_LoopFadeIn(struct ProcGameOverScreen *proc)
