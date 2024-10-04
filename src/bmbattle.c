@@ -504,6 +504,9 @@ void ComputeBattleUnitSupportBonuses(struct BattleUnit* attacker, struct BattleU
         attacker->battleCritRate  += tmpBonuses.bonusCrit;
         attacker->battleDodgeRate += tmpBonuses.bonusDodge;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void ComputeBattleUnitDefense(struct BattleUnit* attacker, struct BattleUnit* defender) {
@@ -556,6 +559,9 @@ void ComputeBattleUnitAttack(struct BattleUnit* attacker, struct BattleUnit* def
 
     if (GetItemIndex(attacker->weapon) == ITEM_MONSTER_STONE)
         attacker->battleAttack = 0;
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void ComputeBattleUnitSpeed(struct BattleUnit* bu) {
@@ -1009,7 +1015,11 @@ void BattleGenerateHitAttributes(struct BattleUnit* attacker, struct BattleUnit*
         }
     }
 
+#ifdef EUROPE
+    // asm("NOP\nNOP\n");
+#else
     attack = gBattleStats.attack;
+#endif
     defense = gBattleStats.defense;
 
     BattleCheckGreatShield(attacker, defender);

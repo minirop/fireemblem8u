@@ -148,7 +148,11 @@ void StartEventWarpAnim(ProcPtr parent, int x, int y, s8 subcmd, s8 flag)
     
     proc = Proc_Start(ProcScr_EventWrapAnim, parent);
     proc->xPos = subcmd;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     proc->yPos = flag;
+#endif
 
     x = x * 0x10 - gBmSt.camera.x - 0x08;
     y = y * 0x10 - gBmSt.camera.y - 0x20;
@@ -163,7 +167,11 @@ void StartEventWarpAnim_unused(ProcPtr parent, int xCamera, int yCamera, s8 subc
     proc->xPos = subcmd;
 
     BG_SetPosition(0, -xCamera, -yCamera);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     proc->yPos = 1;
+#endif
 }
 
 int EventWarpAnimExists()

@@ -423,4 +423,7 @@ void SwapUnitStats(struct Unit* unitA, struct Unit* unitB)
 
         #undef SWAP
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }

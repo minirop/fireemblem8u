@@ -81,7 +81,7 @@ void MakeNew6CBMXFADE2(s8 lock_game, ProcPtr parent)
 {
     struct BmxfadeProc *proc = 
         Proc_StartBlocking(sProcScr_BMXFADE, parent);
-   #ifdef EUROPE
+#ifdef EUROPE
     asm("NOP\nNOP\n");
 #else 
     proc->game_lock = lock_game;

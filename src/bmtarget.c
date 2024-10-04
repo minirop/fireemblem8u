@@ -659,8 +659,11 @@ void MakeGorgonEggHatchTargetList(int faction)
 {
     int i;
     s8 damage;
-
+#ifdef EUROPE
+    //asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     InitTargets(0, 0);
+#endif
 
     // Amount that the Gorgon Egg "heals" per turn
     damage = 5;
