@@ -768,7 +768,11 @@ s8 PlayerPhase_PrepareAction(ProcPtr proc)
 
     item = GetItemIndex(GetUnit(gActionData.subjectIndex)->items[gActionData.itemSlotIndex]);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     gBattleActor.hasItemEffectTarget = 0;
+#endif
 
     switch (item)
     {
