@@ -209,7 +209,11 @@ void EkrDragonQuakeMain(struct ProcEkrDragonQuake * proc)
         }
 
         Proc_End(proc->subproc);
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         Proc_Break(proc);
+#endif
     }
 }
 

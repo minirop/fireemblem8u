@@ -757,6 +757,9 @@ void EkrDragonBodyAnimeMain(struct ProcEfxDKfx * proc)
     default:
         break;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void NewEkrDemoKingAtk(struct Anim * anim, int round_type)

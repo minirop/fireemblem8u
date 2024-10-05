@@ -70,6 +70,10 @@ void NewEfxDamageMojiEffectOBJ(struct Anim * anim, int hitted)
         anim_scr,
         2, val1, 0, PROC_TREE_3
     );
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void efxDamageMojiEffectOBJMain(struct ProcEfxDamageMojiEffectOBJ * proc)

@@ -452,7 +452,10 @@ void efxMaohFlashBG1_Loop(struct ProcEfxBG * proc)
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
             SetDefaultColorEffects_();
+#ifdef EUROPE
+#else
             Proc_Break(proc);
+#endif
         }
     }
 
@@ -559,7 +562,11 @@ void efxMaohFlashBG2_Loop(struct ProcEfxBG * proc)
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
             SetDefaultColorEffects_();
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
             Proc_Break(proc);
+#endif
         }
     }
 
@@ -886,7 +893,10 @@ void efxMaohFlashBG4_Loop(struct ProcEfxBG * proc)
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
             SetDefaultColorEffects_();
+#ifdef EUROPE
+#else
             Proc_Break(proc);
+#endif
         }
     }
 
@@ -1140,8 +1150,11 @@ void StartSubSpell_efxMaohFlashEyeROBJ2(struct Anim * anim, int terminator, s16 
     // clang-format on
 
     pos = GetAnimPosition(anim);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
+#endif
 
     proc = Proc_Start(ProcScr_efxMaohFlashEyeROBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
@@ -1218,8 +1231,11 @@ void StartSubSpell_efxMaohFlashEyeLOBJ2(struct Anim * anim, int terminator, s16 
     // clang-format on
 
     pos = GetAnimPosition(anim);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
+#endif
 
     proc = Proc_Start(ProcScr_efxMaohFlashEyeLOBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
@@ -1304,9 +1320,11 @@ void StartSubSpell_efxMaohFlashEyeOBJ1(struct Anim * anim, int terminator, s16 x
     // clang-format on
 
     pos = GetAnimPosition(anim);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
-
+#endif
     proc = Proc_Start(ProcScr_efxMaohFlashEyeOBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -1382,9 +1400,11 @@ void StartSubSpell_efxMaohFlashEyeFire1OBJ1(struct Anim * anim, int terminator, 
     // clang-format on
 
     pos = GetAnimPosition(anim);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
-
+#endif
     proc = Proc_Start(ProcScr_efxMaohFlashEyeFire1OBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -1463,9 +1483,11 @@ void StartSubSpell_efxMaohFlashEyeFire2OBJ1(struct Anim * anim, int terminator, 
     // clang-format on
 
     pos = GetAnimPosition(anim);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
-
+#endif
     proc = Proc_Start(ProcScr_efxMaohFlashEyeFire2OBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -1659,6 +1681,9 @@ void efxMaohFlashThunderOBJ_Loop(struct ProcEfxOBJ * proc)
         }
         StartSubSpell_efxMaohFlashThunderOBJ2(proc->anim, 10, xBase, 110);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     else if (proc->timer == 60)
     {
         if (pos != 0)
@@ -1689,7 +1714,7 @@ void efxMaohFlashThunderOBJ_Loop(struct ProcEfxOBJ * proc)
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
-
+#endif
     return;
 }
 
@@ -1732,7 +1757,9 @@ void StartSubSpell_efxMaohFlashThunderOBJ2(struct Anim * anim, int terminator, s
 
     SpellFx_RegisterObjPal(Pal_DemonLightSprites, PLTT_SIZE_4BPP);
     SpellFx_RegisterObjGfx(Img_DemonLightSprites, 32 * 4 * CHR_SIZE);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

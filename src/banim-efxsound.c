@@ -781,8 +781,11 @@ void EfxPlayHittedSFX(struct Anim * anim)
     int songid = (u16)-1;
     s16 _songid;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     EfxPlayCriticalHittedSFX(anim);
-
+#endif
     if (GetEfxHpChangeType(animr) != EFX_HPT_NOT_CHANGE && (GetRoundFlagByAnim(anim) & ANIM_ROUND_PIERCE))
     {
         _songid = 0x3CF;

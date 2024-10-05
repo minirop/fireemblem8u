@@ -80,10 +80,11 @@ void SetCRSpellBgPosition(struct Anim * anim, struct AnimMagicFxBuffer * magicFx
         x = BanimTypesPosRight[0] - anim->xPosition;
     }
 
+#ifdef EUROPE
+#else
     y = 88 - anim->yPosition;
-
+#endif
     BG_SetPosition(magicFx->bg, x - magicFx->xOffsetBg, y - magicFx->yOffsetBg);
-
     return;
 }
 

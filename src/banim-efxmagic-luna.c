@@ -728,6 +728,9 @@ void efxLunaOBJ_Loop_B(struct ProcEfxOBJ * proc)
         Proc_Break(proc);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

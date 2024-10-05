@@ -150,6 +150,9 @@ void NewEfxSkillType01BG(struct Anim *anim)
     EfxSkillSetAnimState(GetAnimAnotherSide(proc->anim));
 
     PlaySFX(0x3D1, 0x100, proc->anim->xPosition, 1);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void EfxSkillType01BGMain(struct ProcEfxSkill *proc)
