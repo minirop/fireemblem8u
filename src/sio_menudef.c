@@ -57,10 +57,14 @@ int sub_804D8DC(struct MenuProc * menu, struct MenuItemProc * menuItem)
 
     s8 color = CanUnitUseWeapon(gActiveUnit, item);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (GetItemMinRange(item) > 2)
     {
         color = 0;
     }
+#endif
 
     DrawItemMenuLine(
         &menuItem->text, item, color, TILEMAP_LOCATED(gBG0TilemapBuffer, menuItem->xTile, menuItem->yTile));

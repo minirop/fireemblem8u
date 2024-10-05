@@ -652,6 +652,9 @@ void UnitKakudaiMain(struct ProcUnitKakudai * proc)
         anim->oamBase = 0;
         AnimDisplay(anim);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void UnitKakudaiEndNop(struct ProcUnitKakudai * proc)
@@ -1423,9 +1426,10 @@ bool PrepareBattleGraphicsMaybe(void)
         if (gBanimTerrain[POS_L] == TERRAIN_SNAG)
             return false;
     }
-
     if (gBanimValid[POS_R] == true)
     {
+#ifdef EUROPE
+#else
         if (unit_bu2->statusIndex == UNIT_STATUS_BERSERK)
             return false;
 
@@ -1437,6 +1441,7 @@ bool PrepareBattleGraphicsMaybe(void)
 
         if (gBanimFloorfx[POS_R] == -1)
             return false;
+#endif
 
         if (gBanimTerrain[POS_R] == TERRAIN_WALL_1B)
             return false;
@@ -1444,7 +1449,6 @@ bool PrepareBattleGraphicsMaybe(void)
         if (gBanimTerrain[POS_R] == TERRAIN_SNAG)
             return false;
     }
-
     return true;
 }
 
