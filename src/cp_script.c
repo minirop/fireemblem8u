@@ -587,7 +587,8 @@ void AiScriptCmd_12_MoveTowardsEnemy(u8* pc) {
 //! FE8U = 0x0803CE98
 void AiScriptCmd_13(u8* pc) {
     struct Vec2 pos;
-
+// #ifdef EUROPE
+// #else
     if (gpAiScriptCurrent->unk_08 == 0) {
         if (AiFindTargetInReachNeglectWallByFunc(AiIsUnitEnemy, &pos) == 1) {
             AiTryMoveTowardsNeglectWall(pos.x, pos.y, 0, gpAiScriptCurrent->unk_02, 1);
@@ -597,7 +598,7 @@ void AiScriptCmd_13(u8* pc) {
             AiTryMoveTowardsNeglectWall(pos.x, pos.y, 0, gpAiScriptCurrent->unk_02, 1);
         }
     }
-
+// #endif
     (*pc)++;
 
     return;
