@@ -181,6 +181,9 @@ void DrawLinkArenaPointsBox(struct Text * th, int x, int y, int var, int number)
     ClearText(th);
     PutNumber(TILEMAP_LOCATED(gBG0TilemapBuffer, x + 4, y + 1), TEXT_COLOR_SYSTEM_BLUE, number);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

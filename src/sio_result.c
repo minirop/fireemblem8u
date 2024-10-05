@@ -67,7 +67,10 @@ void DrawLinkArenaRankingRow(struct Text * th, char * nameStr, u8 rank, u16 poin
     Text_InsertDrawString(th, 93, 0, GetStringFromIndex(0x77F)); // TODO: msgid "Pts."
     Text_InsertDrawString(th, 128, 2, GetStringFromIndex(rankMsgLut[rank & 0xff]));
     Text_InsertDrawString(th, 154, 0, GetStringFromIndex(playerMsgLut[playerCount & 0xff]));
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -154,7 +157,9 @@ void SioResult_Init(struct SioResultProc * proc)
     StartLinkArenaButtonSpriteDraw(0xc0, 0x10, proc);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -305,7 +310,10 @@ void SioResult_NewHS_Init(struct SioResultProc * proc)
     proc->unk_2c = sub_804D7DC(14, proc->unk_3c * 16 - 24, proc);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

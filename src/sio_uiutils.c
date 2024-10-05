@@ -95,7 +95,9 @@ void LATitleBanner_Init(struct LinkArenaTitleBannerProc * proc)
 
     CallARM_FillTileRect(gBG2TilemapBuffer, gUnknown_085B0F2C, (((u16)(proc->chr >> 1) >> 4)) | 0x1000);
     BG_EnableSyncByMask(BG2_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -897,7 +899,11 @@ void NameEntrySpriteDraw_Loop(struct NameEntrySpriteDrawProc * proc)
     }
 
     UpdateNameEntrySpriteGlow();
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -928,7 +934,10 @@ ProcPtr StartNameEntrySpriteDraw(ProcPtr parent, int x, int y)
 
     proc->cursorKind = 0;
     proc->xPointer = 0;
+#ifdef EUROPE
+#else
     proc->unk_44 = 1;
+#endif
 
     return proc;
 }
@@ -1347,7 +1356,11 @@ void UpdateLinkArenaMenuScrollBar(u8 a, s16 b)
         return;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     proc->unk_3c = a;
+#endif
     proc->unk_3e = b & 0xff;
     proc->unk_38 = (proc->unk_34 * proc->unk_3d * 8) / proc->unk_3c;
     proc->unk_42 = (proc->unk_34 * 0x800) / (proc->unk_3c * 16);
@@ -1396,7 +1409,11 @@ void LAPhaseIntro_Init(void)
 
     gUnknown_03001860 = gPlaySt.faction;
     gPlaySt.faction = FACTION_BLUE;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1775,6 +1792,9 @@ void sub_804D80C(void)
 {
     Decompress(gGfx_SupportMenu, (void *)(0x06016800));
     ApplyPalette(gPal_SupportMenu, 0x12);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

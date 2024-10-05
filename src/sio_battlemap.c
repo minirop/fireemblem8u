@@ -738,10 +738,13 @@ void sub_8049B24(u16 keys, s8 flag)
     r5 = r2;
     gUnk_Sio_0203DD90.unk_03 = gUnk_Sio_0203DD90.unk_02;
 
+#ifdef EUROPE
+#else
     if ((keys & DPAD_ANY) == 0)
     {
         return;
     }
+#endif
 
     r4 = r2 << 2;
 
@@ -1519,7 +1522,9 @@ void sub_804A7C0(ProcPtr proc)
     sub_80492D8();
 
     Proc_Break(proc);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -2670,8 +2675,10 @@ void sub_804B71C(struct SioBattleMapProc * proc)
 
         proc->unk_58 = i;
     }
-
+#ifdef EUROPE
+#else
     proc->unk_5c = 0;
+#endif
 
     return;
 }
