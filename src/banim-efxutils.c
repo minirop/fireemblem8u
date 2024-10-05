@@ -232,7 +232,10 @@ void EfxTmCpyExt(const u16 * src, s16 src_width, u16 * dst, s16 dst_width, u16 w
 
         if (dst_width != -1)
         {
+#ifdef EUROPE
+#else
             len2 = dst_width - width;
+#endif
             dst = dst + len2;
         }
     }
@@ -270,11 +273,15 @@ void EfxTmCpyExtHFlip(const u16 * src, s16 src_width, u16 * dst, s16 dst_width, 
             src = src + len1;
         }
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         if (dst_width != -1)
         {
             len2 = width + dst_width;
             dst = dst + len2;
         }
+#endif
     }
 }
 
@@ -436,8 +443,14 @@ bool EkrPalModifyUnused(u16 * pal_start, u16 * pal_end, u16 * dst, u16 amount, u
 
         u16 r = Interpolate(0, r1, r2, (s16)start, (s16)end);
         u16 g = Interpolate(0, g1, g2, (s16)start, (s16)end);
+#ifdef EUROPE
+        u16 b = 0;
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\n");
+#else
         u16 b = Interpolate(0, b1, b2, (s16)start, (s16)end);
-
+#endif
         *dst = (b & 0x7C00) | (g & 0x03E0) | (r & 0x001F);
 
         pal_start++;
@@ -851,10 +864,13 @@ void BanimUpdateSpriteRotScale(void * src, struct AnimSpriteData * out, s16 x, s
         val1 = val1 - _val;
         out->as.object.x = val1;
 
+#ifdef EUROPE
+#else
         val1 = GetAnimSpriteRotScaleY(scr->header);
         val1 = val1 << 0x10;
         val1 = val1 >> 0x11;
         _val = val1 << 8;
+#endif
         _val = val1 - Div(_val, r5);
         val1 = scr->as.object.y - _val;
         _val = scr->as.object.y << 8;

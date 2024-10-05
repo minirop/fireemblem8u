@@ -738,6 +738,9 @@ void EfxTriangleQUAKEMain(struct ProcEfxTriagnleQUAKE * proc)
         SetEkrFrontAnimPostion(1, ix2, iy2);
 
         Proc_End(proc->qproc);
+#ifdef EUROPE
+#else
         Proc_Break(proc);
+#endif
     }
 }

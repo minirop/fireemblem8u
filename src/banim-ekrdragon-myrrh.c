@@ -236,4 +236,7 @@ void RegisterEkrDragonStatusType(void)
     }
     else
         SetEkrDragonStatusType(gAnims[2], EKRDRGON_TYPE_NORMAL);
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#endif
 }

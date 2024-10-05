@@ -1304,8 +1304,11 @@ void NewEfxDarkGradoOBJ01piece(struct Anim * anim, s16 b, s16 c, s16 d, u16 e)
     struct ProcEfxOBJ * proc;
     struct Anim * frontAnim;
     u32 * scr;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     gEfxBgSemaphore++;
+#endif
 
     proc = Proc_Start(ProcScr_efxDarkGradoOBJ01piece, PROC_TREE_3);
     proc->anim = anim;

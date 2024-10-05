@@ -564,10 +564,13 @@ void RunMuMoveScript(struct MuProc * proc)
             command = command - MOVE_CMD_MOVE_BASE;
             if (command != proc->facing)
             {
+#ifdef EUROPE
+#else
 #if !BUGFIX
                 GetMuAnimForJid(proc->jid);
 #endif
                 SetMuFacing(proc, command - MOVE_CMD_MOVE_BASE);
+#endif
                 proc->state = MU_STATE_MOVEMENT;
             }
             return;
