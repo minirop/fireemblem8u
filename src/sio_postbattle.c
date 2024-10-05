@@ -283,7 +283,10 @@ void SioPostBattle_Init(struct SioPostBattleProc * proc)
     SioPostBattle_StartMusicProc(proc);
 
     BG_EnableSyncByMask(BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

@@ -174,12 +174,91 @@ s8 AiFindTargetInReachByClassId(int classId, struct Vec2* out) {
         out->y = unit->yPos;
     }
 
+#ifdef EUROPE
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    // asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
+
     if (out->x >= 0) {
         return 1;
     }
 
     return 0;
 }
+#ifdef EUROPE
+//! FE8U = 0x0803AA40
+s8 AiFindTargetInReachNeglectWallByFunc(s8(*func)(struct Unit* unit), struct Vec2* out) {
+    s16 ix;
+    s16 iy;
+
+    u8 bestDistance = 0xff;
+
+    s16 xOut = 0;
+    s16 yOut = 0;
+
+    GenerateExtendedMovementMapOnRangeNeglectWall(gActiveUnit->xPos, gActiveUnit->yPos, GetUnitMovementCost(gActiveUnit));
+
+    xOut = -1;
+
+    for (iy = gBmMapSize.y - 1; iy >= 0; iy--) {
+        for (ix = gBmMapSize.x - 1; ix >= 0; ix--) {
+
+            if (gBmMapRange[iy][ix] > MAP_MOVEMENT_MAX) {
+                continue;
+            }
+
+            if (gBmMapUnit[iy][ix] == 0) {
+                continue;
+            }
+
+            if (gBmMapUnit[iy][ix] == gActiveUnitId) {
+                continue;
+            }
+
+            if (func(GetUnit(gBmMapUnit[iy][ix])) == 0) {
+                continue;
+            }
+
+            if (gBmMapRange[iy][ix] > bestDistance) {
+                continue;
+            }
+
+            bestDistance = gBmMapRange[iy][ix];
+            xOut = ix;
+            yOut = iy;
+        }
+    }
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
+    if (xOut >= 0) {
+        out->x = xOut;
+        out->y = yOut;
+
+        return 1;
+    }
+#endif
+
+    return 0;
+}
+#endif
 
 //! FE8U = 0x0803A924
 s8 AiFindTargetInReachByFunc(s8(*func)(struct Unit* unit), struct Vec2* out) {
@@ -222,17 +301,21 @@ s8 AiFindTargetInReachByFunc(s8(*func)(struct Unit* unit), struct Vec2* out) {
             yOut = iy;
         }
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
     if (xOut >= 0) {
         out->x = xOut;
         out->y = yOut;
 
         return 1;
     }
-
+#endif
     return 0;
 }
-
+#ifndef EUROPE
 //! FE8U = 0x0803AA40
 s8 AiFindTargetInReachNeglectWallByFunc(s8(*func)(struct Unit* unit), struct Vec2* out) {
     s16 ix;
@@ -285,6 +368,7 @@ s8 AiFindTargetInReachNeglectWallByFunc(s8(*func)(struct Unit* unit), struct Vec
 
     return 0;
 }
+#endif
 
 //! FE8U = 0x0803AB5C
 void AiRandomMove(void) {
@@ -323,10 +407,15 @@ void AiRandomMove(void) {
             yOut = iy;
         }
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (xOut >= 0) {
         AiSetDecision(xOut, yOut, AI_ACTION_NONE, 0, 0, 0, 0);
     }
+#endif
 
     return;
 }
@@ -702,9 +791,13 @@ int AiCountNearbyUnits(s16 x, s16 y) {
     while (it->x != 9999) {
         it++;
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         if (x + it->x >= gBmMapSize.x) {
             continue;
         }
+#endif
 
         if (y + it->y >= gBmMapSize.y) {
             continue;
@@ -731,9 +824,13 @@ int AiCountNearbyEnemyUnits(s16 x, s16 y) {
     while (it->x != 9999) {
         it++;
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         if (x + it->x >= gBmMapSize.x) {
             continue;
         }
+#endif
 
         if (y + it->y >= gBmMapSize.y) {
             continue;
@@ -764,9 +861,13 @@ int AiCountNearbyAlliedUnits(s16 x, s16 y) {
     while (it->x != 9999) {
         it++;
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         if (x + it->x >= gBmMapSize.x) {
             continue;
         }
+#endif
 
         if (y + it->y >= gBmMapSize.y) {
             continue;
@@ -1060,12 +1161,15 @@ void AiTryMoveTowards(s16 x, s16 y, u8 action, u8 maxDanger, u8 unk) {
         AiSetDecision(gActiveUnit->xPos, gActiveUnit->yPos, action, 0, 0, 0, 0);
         return;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (unk) {
         GenerateExtendedMovementMapOnRange(x, y, GetUnitMovementCost(gActiveUnit));
     } else {
         sub_80410C4(x, y, gActiveUnit);
     }
+#endif
 
     GenerateUnitMovementMap(gActiveUnit);
 
@@ -1123,12 +1227,15 @@ void AiTryMoveTowardsNeglectWall(s16 x, s16 y, u8 action, u8 maxDanger, u8 unk) 
         AiSetDecision(gActiveUnit->xPos, gActiveUnit->yPos, action, 0, 0, 0, 0);
         return;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (unk) {
         GenerateExtendedMovementMapOnRangeNeglectWall(x, y, GetUnitMovementCost(gActiveUnit));
     } else {
         sub_8040F54(x, y, gActiveUnit);
     }
+#endif
 
     GenerateUnitMovementMap(gActiveUnit);
 

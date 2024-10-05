@@ -342,7 +342,10 @@ void sub_8045DC0(struct SioBatProc * proc)
     sub_8043100(proc->unk_30 + 0x748, 1);
 
     SetWinEnable(0, 0, 0);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -501,7 +504,9 @@ void sub_8045F48(struct SioBatProc * proc)
     gUnknown_03004E80.param = gSioSt->unk_000;
 
     SioSend(&gUnknown_03004E80, 0x16);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -540,6 +545,9 @@ void sub_804619C(struct SioBatProc * proc)
 
     Proc_Break(proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -918,7 +926,10 @@ void sub_8046838(ProcPtr proc)
     sub_8043100(0x74B, 1);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

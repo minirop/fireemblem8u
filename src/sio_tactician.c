@@ -756,6 +756,11 @@ void Tactician_InitScreen(struct ProcTactician * proc)
         proc->child1->unk40 = proc->cur_len * 7;
     }
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void SioUpdateTeam(char * str, int team)
@@ -789,9 +794,13 @@ void Tactician_MoveHand(struct ProcTactician * proc, int pos, const struct Tacti
     const struct TacticianTextConf * adj_conf;
 
     adj_idx  = conf->adj_idx[pos];
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     adj_conf = gTacticianTextConf + conf->adj_idx[pos];
 
     str_idx = proc->line_idx * 3;
+#endif
 
     while (*adj_conf->str[str_idx] == '\0')
     {
@@ -1033,6 +1042,8 @@ void Tactician_LoopCore(struct ProcTactician * proc, const struct TacticianTextC
         TacticianTryDeleteChar(proc, conf);
     }
 
+#ifdef EUROPE
+#else
     if ((gKeyStatusPtr->newKeys & START_BUTTON) != 0)
     {
         SioPlaySoundEffect(3);
@@ -1065,7 +1076,6 @@ void Tactician_LoopCore(struct ProcTactician * proc, const struct TacticianTextC
         Proc_Goto(proc, 1);
         return;
     }
-
     if ((gKeyStatusPtr->newKeys & B_BUTTON) != 0)
     {
         if (proc->cur_len != 0)
@@ -1080,7 +1090,7 @@ void Tactician_LoopCore(struct ProcTactician * proc, const struct TacticianTextC
             Proc_Goto(proc, 3);
         }
     }
-
+#endif
     return;
 }
 

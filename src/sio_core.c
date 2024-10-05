@@ -934,8 +934,11 @@ int SioSend16(u16 * word, int arg_1)
 {
     if (gSioSt->selfId == -1)
         return -1;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     SIO->siodata = *word;
+#endif
 
     if (gSioSt->selfId == 0 && arg_1 < 0)
     {

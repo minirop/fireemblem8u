@@ -1239,7 +1239,6 @@ s8 AiBallistaRideExit(const void * input)
     if (x >= 0) {
         AiTryMoveTowards(x, y, 0, 0xff, 1);
     }
-
     if (gAiDecision.actionPerformed == 1) {
         if ((gAiDecision.xMove == x) && (gAiDecision.yMove == y)) {
             AiUpdateDecision(AI_ACTION_RIDEBALLISTA, 0, 0, 0, 0);
@@ -1247,8 +1246,11 @@ s8 AiBallistaRideExit(const void * input)
     } else {
         if (unk != 0) {
             gAiState.cmd_result[0] = 7;
+#ifdef EUROPE
+#else
         } else {
             gAiState.cmd_result[0] = 6;
+#endif
         }
     }
 

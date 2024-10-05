@@ -564,7 +564,10 @@ void SioTeamList_SetupGfx(struct SioTeamListProc * proc)
     sub_8043100(GetLATeamListHelpTextId(proc), 1);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1030,6 +1033,10 @@ void SioTeamList_804429C(struct SioTeamListProc * proc)
         sub_8044280(unk_2C, xPos);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
+
     return;
 }
 
@@ -1062,6 +1069,10 @@ void SioTeamList_8044324(struct SioTeamListProc * proc)
         BG_SetPosition(BG_0, xPos, 0);
         sub_8044280(unk_2C, xPos);
     }
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 
     return;
 }
