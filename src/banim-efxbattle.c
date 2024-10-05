@@ -80,8 +80,11 @@ void NewEfxFarAttackWithDistance(struct Anim * anim, s16 arg)
                 proc->unk_36 = (-val >> 1);
                 proc->unk_38 = -val;
             }
-
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\n");
+#else
             gEkrBgPosition = proc->unk_32;
+#endif
             gEfxFarAttackExist = 1;
 
             break;
@@ -1176,7 +1179,6 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
             EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
             EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         }
-
         Proc_End(proc);
     }
     else
@@ -1192,7 +1194,11 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
         x = vec[proc->timer * 2 + 0];
         y = vec[proc->timer * 2 + 1];
 
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         SetEkrBg2QuakeVec(x, y);
+#endif
 
         proc->timer++;
 

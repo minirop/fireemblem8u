@@ -108,10 +108,12 @@ void StartBattleAnimHitEffects(struct Anim *anim, int type, int a, int b)
         val1 = gEfxHpLutOff[GetAnimPosition(animr5)];
         val2 = gEfxHpLutOff[GetAnimPosition(animr5)];
         val2++;
-    
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         val1 = GetEfxHp(val1 * 2 + GetAnimPosition(animr5));
+#endif
         val2 = GetEfxHp(val2 * 2 + GetAnimPosition(animr5));
-
         if (val1 != val2) {
             NewEfxHpBar(animr5);
 
@@ -444,11 +446,14 @@ s16 EfxAdvanceFrameLut(s16 *ptime, s16 *pcount, const s16 lut[])
             tmp = *pcount;
             uframe = lut[tmp * 2];
         }
-    
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         count2 = *pcount;
         time2 = lut[count2 * 2 + 1];
         ++*(vs16 *)pcount;
         *ptime = time2 - 1;
+#endif
         return uframe;
     } else {
         --*ptime;
@@ -506,6 +511,9 @@ void SetEkrFrontAnimPostion(int pos, s16 x, s16 y)
         anim->xPosition = ux;
         anim->yPosition = uy;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 int Get0201FAC8(void)
@@ -570,8 +578,13 @@ void sub_8055A64(struct ProcEfxSpdQuake *proc)
     }
 
     ++proc->timer;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (vecs[proc->timer * 2 + 0] == 0x7FFF)
         proc->timer = 0;
+#endif
 }
 
 void sub_8055B38(struct ProcEfxSpdQuake *proc)

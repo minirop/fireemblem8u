@@ -362,8 +362,17 @@ void MultiBootStartMaster(struct MultiBootParam * mp, const u8 * srcp, int lengt
             i = (palette_color << 3) | (palette_speed - 1);
             break;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     mp->palette_data = ((i & 0x3f) << 1) | 0x81;
+#endif
     mp->probe_count = 0xd0;
 }
 

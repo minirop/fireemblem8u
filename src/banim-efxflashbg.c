@@ -22,6 +22,9 @@ void NewEfxFlashBgWhite(struct Anim * anim, int duartion)
     proc->timer = 0;
     proc->terminator = duartion;
     CpuFastFill16(-1, gEfxPal, PLTT_SIZE);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewEfxFlashBgRed(struct Anim * anim, int duartion)
@@ -32,6 +35,9 @@ void NewEfxFlashBgRed(struct Anim * anim, int duartion)
     proc->timer = 0;
     proc->terminator = duartion;
     CpuFastFill16(0x001F001F, gEfxPal, PLTT_SIZE);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewEfxFlashBgBlack(struct Anim * anim, int duartion)
@@ -42,6 +48,9 @@ void NewEfxFlashBgBlack(struct Anim * anim, int duartion)
     proc->timer = 0;
     proc->terminator = duartion;
     CpuFastFill16(0, gEfxPal, PLTT_SIZE);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void NewEfxFlashBgDirectly(struct Anim * anim, int duartion)
@@ -51,18 +60,33 @@ void NewEfxFlashBgDirectly(struct Anim * anim, int duartion)
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
+
+#ifdef EUROPE
+void FUN_080542ac(struct ProcEfxFlashing * proc)
+{
+    proc->unk29 = 0;
+}
+#endif
 
 void EfxFlashBgMain(struct ProcEfxFlashing * proc)
 {
     /**
      * Disable the normal palette sync and use the non-cache buffer
     */
-    CpuFastCopy(gEfxPal, (u16 *)PLTT, PLTT_SIZE);
-    DisablePaletteSync();
+#ifdef EUROPE
+    if (proc->unk29)
+#endif
+    {
+        CpuFastCopy(gEfxPal, (u16 *)PLTT, PLTT_SIZE);
+        DisablePaletteSync();
 
-    if (++proc->timer >= proc->terminator)
-        Proc_Break(proc);
+        if (++proc->timer >= proc->terminator)
+            Proc_Break(proc);
+    }
 }
 
 void EfxFlashRestorePalSync(struct ProcEfxFlashing * proc)

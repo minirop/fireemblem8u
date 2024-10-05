@@ -748,6 +748,9 @@ void ekrBattleExecExpGain(struct ProcEkrBattle * proc)
 
     proc->timer = 0;
     proc->proc_idleCb = (ProcFunc)ekrBattle_80508F0;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void ekrBattle_80508F0(struct ProcEkrBattle *proc)

@@ -93,14 +93,6 @@ _0805130A:
 	mov r3, r9
 	lsls r1, r3, #1
 	ldr r3, _0805137C  @ 0xFFFFFCC0
-	adds r2, r4, r3
-	adds r1, r1, r2
-	adds r5, r5, r1
-	lsls r4, r6, #0x10
-	lsrs r4, r4, #0x10
-	movs r1, #1
-	negs r1, r1
-	str r1, [sp]
 	str r1, [sp, #4]
 	adds r1, r5, #0
 	movs r2, #0xf
@@ -141,15 +133,6 @@ _0805138A:
 	ldr r1, _08051420  @ gBG0TilemapBuffer
 	adds r0, r0, r1
 	adds r5, r5, r0
-	lsls r4, r6, #0x10
-	lsrs r4, r4, #0x10
-	movs r0, #1
-	negs r0, r0
-	str r0, [sp]
-	str r0, [sp, #4]
-	adds r0, r2, #0
-	adds r1, r5, #0
-	movs r2, #0x10
 	adds r3, r4, #0
 	bl EfxTmCpyBG
 	movs r0, #0x80
@@ -176,25 +159,11 @@ _080513C4:
 	movs r6, #1
 	str r6, [sp, #0xd8]
 _080513DC:
-	movs r0, #2
-	ldrsh r1, [r3, r0]
-	ldrh r2, [r5, #2]
-	movs r6, #2
-	ldrsh r0, [r5, r6]
-	cmp r1, r0
 	beq _080513EE
 	movs r0, #1
 	str r0, [sp, #0xd8]
 _080513EE:
-	strh r4, [r3]
-	strh r2, [r3, #2]
-	ldrh r7, [r5]
 	ldr r0, _0805142C  @ gBanimMaxHP
-	ldrh r6, [r0]
-	ldrh r1, [r5, #2]
-	mov r8, r1
-	ldrh r0, [r0, #2]
-	str r0, [sp, #0xd4]
 	ldr r0, _08051430  @ gEkrDistanceType
 	movs r2, #0
 	ldrsh r0, [r0, r2]

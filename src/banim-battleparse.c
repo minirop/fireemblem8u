@@ -86,6 +86,9 @@ int GetBanimTerrainGround(u16 terrain, u16 tileset)
 
 int GetBanimBackgroundIndex(u16 terrain, u16 tileset)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     switch (tileset) {
     case 0x01:
         return gBanimBGLut01[terrain];
@@ -144,9 +147,11 @@ int GetBanimBackgroundIndex(u16 terrain, u16 tileset)
     case 0x13:
         return gBanimBGLut13[terrain];
 
+#ifdef EUROPE
+#else
     case 0x14:
         return gBanimBGLut14[terrain];
-
+#endif
     case 0:
     default:
         return gBanimBGLutDefault[terrain];
@@ -663,19 +668,8 @@ void ParseBattleHitToBanimCmd(void)
         adds r3, r1, #0\n\
         adds r1, r0, #4\n\
     _08058220:\n\
-        ldrh r0, [r1]\n\
-        orrs r0, r3\n\
-        strh r0, [r1]\n\
-        adds r1, #2\n\
-        adds r2, #1\n\
         cmp r2, #0x13\n\
         bls _08058220\n\
-        movs r2, #0\n\
-        str r2, [r5, #4]\n\
-        str r2, [r5]\n\
-        movs r3, #0\n\
-        ldrsh r0, [r6, r3]\n\
-        cmp r0, #4\n\
         bne _0805825C\n\
         strh r0, [r4]\n\
         strh r0, [r4, #2]\n\
