@@ -34,8 +34,10 @@ void NewEfxHpBar(struct Anim * anim)
 
     if (ANIM_ROUND_GREAT_SHIELD & GetRoundFlagByAnim(anim) || gEkrHpBarCount != 0)
         return;
-
+#ifdef EUROPE
+#else
     gEkrHpBarCount = 1;
+#endif
 
     proc = Proc_Start(ProcScr_efxHPBar, PROC_TREE_3);
     proc->anim_this = anim;
@@ -322,8 +324,10 @@ void EfxHpBarResire_DeclineToDeath(struct ProcEfxHpBar * proc)
                 gBanimValid[GetAnimPosition(proc->anim_main_this)] = false;
             }
         }
-    
+#ifdef EUROPE
+#else
         Proc_Break(proc);
+#endif
         return;
     }
 

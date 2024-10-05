@@ -307,6 +307,9 @@ void EfxRestWINMain(struct ProcEfx *proc)
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EfxMagicHBlank_805B724(void)
@@ -576,13 +579,16 @@ void EfxCircleWINMain(struct ProcEfxCircleWIN * proc)
     }
 
     a = proc->unk_3a - var;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
     if (a < 0)
     {
         a = 0;
     }
-
     b = var + proc->unk_3a;
+#endif
 
     if (b > DISPLAY_HEIGHT)
     {
@@ -650,7 +656,12 @@ void StartSpellThing_MagicQuake(struct Anim * anim, int terminator, int c)
     proc->anim = anim;
     proc->pQuakePureProc = NewEfxQuakePure(c, 0);
     proc->timer = 0;
+
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     proc->terminator = terminator;
+#endif
 
     return;
 }

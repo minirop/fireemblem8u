@@ -435,6 +435,9 @@ void DrawUiFrame2(int x, int y, int width, int height, int style)
     BG_SetPosition(1, 0, 0);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void DisplayUiHand(int x, int y)

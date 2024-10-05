@@ -124,6 +124,9 @@ void NewEkrGauge(void)
     LoadIconObjectGraphics(GetItemIconId(gpEkrBattleUnitLeft->weaponBefore), 0x1DC);
     LoadIconObjectGraphics(GetItemIconId(gpEkrBattleUnitRight->weaponBefore), 0x1DE);
     ApplyPalette(gPal_MiscUiGraphics, 0x10);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EndEkrGauge(void)

@@ -730,6 +730,8 @@ void BattleAIS_ExecCommands(void)
                 anim2->state3 &= ~ANIM_BIT3_NEXT_ROUND_START;
             } /* ANIM_ROUND_INVALID */
         }
+#ifdef EUROPE
+#else
         else
         {
             if (anim->state3 & ANIM_BIT3_NEW_ROUND_START)
@@ -764,5 +766,13 @@ void BattleAIS_ExecCommands(void)
                 }
             }
         }
+#endif
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }

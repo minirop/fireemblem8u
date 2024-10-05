@@ -42,8 +42,10 @@ void NewEfxWeaponIcon(s16 effective1, s16 effective2)
     proc->invalid = false;
     proc->eff1 = effective1;
     proc->eff2 = effective2;
-
+#ifdef EUROPE
+#else
     gpProcEfxWeaponIcon = proc;
+#endif
 }
 
 void EndProcEfxWeaponIcon(void)
