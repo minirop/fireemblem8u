@@ -496,6 +496,10 @@ void NewEfxMagfcastBG(struct Anim *anim, u32 type)
         else
             BG_SetPosition(BG_1, 0xE8, 0x0);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void EfxMagfcastBGMain(struct ProcEfxBG * proc)
@@ -536,6 +540,9 @@ void EfxMagfcastBGMain(struct ProcEfxBG * proc)
         SetDefaultColorEffects_();
         Proc_End(proc);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 /**
@@ -554,6 +561,10 @@ void NewEfxSunakemuri(struct Anim *anim, int type)
         proc->timer = 0;
         NewEfxSunakemuriOBJ(anim, type);
     }
+
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 struct ProcCmd CONST_DATA ProcScr_efxSunakemuri[] = {
@@ -1090,7 +1101,10 @@ CONST_DATA s16 gUnknown_085D9154[] = {
             }
             *dst = ref;
         } else {
+#ifdef EUROPE
+#else
             *dst = 0;
+#endif
         }
     }
 }
@@ -1503,11 +1517,14 @@ void EfxChillEffectBGCOL_Loop(struct ProcEfxBGCOL * proc)
         SpellFx_RegisterBgPal(ptr, 0x20);
         return;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (ret == -1) {
         Proc_Break(proc);
         return;
     }
+#endif
 }
 
 
@@ -1557,7 +1574,11 @@ void EfxChillAnime_Loop(struct ProcEfxOBJ * proc)
 
         _anim1->state3 |= ANIM_BIT3_BLOCKEND;
         _anim2->state3 |= ANIM_BIT3_BLOCKEND;
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         Proc_Break(proc);
+#endif
     }
 }
 

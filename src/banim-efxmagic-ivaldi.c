@@ -210,9 +210,10 @@ void StartSpellBG_IvaldiBG1(struct Anim * anim)
 void efxIvaldiBG1_Loop(struct ProcEfxBG * proc)
 {
     s16 ret;
-
+#ifdef EUROPE
+#else
     GetAnimAnotherSide(proc->anim);
-
+#endif
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
     BG_SetPosition(1, 0, 0);
@@ -304,8 +305,11 @@ void efxIvaldiBG2_Loop(struct ProcEfxBG * proc)
 {
     s16 ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     BG_SetPosition(BG_1, 0, 0);
-
+#endif
     if (ret >= 0)
     {
         u16 ** tsaL = proc->tsal;
@@ -436,8 +440,11 @@ void efxIvaldiBG3_Loop(struct ProcEfxBG * proc)
 {
     s16 ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     BG_SetPosition(BG_1, 0, 0);
-
+#endif
     if (ret >= 0)
     {
         u16 ** tsaL = proc->tsal;
@@ -565,7 +572,11 @@ void efxIvaldiBG4_Loop(struct ProcEfxBG * proc)
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
             SetDefaultColorEffects_();
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
             Proc_Break(proc);
+#endif
         }
     }
 

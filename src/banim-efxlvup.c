@@ -131,7 +131,10 @@ void EfxPartsofScroll2Main(ProcPtr proc)
     for (; i < 0xA0; i++)
     {
         s16 * src = gUnknown_0875941C;
+#if EUROPE
+#else
         src = src - 0x28;
+#endif
 
         if (i < 0x28)
         {
@@ -341,6 +344,10 @@ void NewEfxlvupbg(struct Anim * anim)
 
     SpellFx_RegisterBgPal(Pal_EfxLvupBG, 0x20);
     SpellFx_SetSomeColorEffect();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EfxlvupbgMain(struct ProcEfxBG * proc)
@@ -404,6 +411,10 @@ void NewEfxLvupBG2(struct Anim * anim)
 
     SpellFx_RegisterBgGfx(Img_EfxLvupBG2, 0x2000);
     SpellFx_RegisterBgPal(Pal_EfxLvupBG2, 0x20);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EfxLvupBg2Main(struct ProcEfxBG * proc)
