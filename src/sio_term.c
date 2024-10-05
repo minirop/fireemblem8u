@@ -157,7 +157,9 @@ void sub_80469C4(struct SioTermProc * proc)
     sub_804C508();
 
     BG_EnableSyncByMask(0xf);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

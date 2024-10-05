@@ -41,7 +41,9 @@ int sub_8047A54(struct SioMenuProc * proc, int lineNum)
     {
         return -1;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return gUnknown_080D9EC8[proc->unk_48 * 2 + lineNum];
 }
 
@@ -159,7 +161,9 @@ void SioMenu_LoadGraphics(struct SioMenuProc * proc)
 
     StartBgm(0x38, 0);
     sub_80497CC();
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -311,7 +315,9 @@ void SioMenu_RestartGraphicsMaybe(struct SioMenuProc * proc)
     StartBgm(0x38, 0);
 
     proc->unk_54 = 0;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

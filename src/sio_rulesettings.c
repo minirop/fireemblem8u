@@ -123,7 +123,10 @@ void SioRuleSettings_Init(struct ProcSioRuleSettings * proc)
     sub_8043100(proc->unk_30 + 0x745, 1);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
