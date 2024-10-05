@@ -630,7 +630,10 @@ struct Text* DrawNumberText(struct Text* th, u16 number, u8 places, s8 x, s8 y, 
         }
 
         if (shouldDraw || (i == 0)) {
+#ifdef EUROPE
+#else
             InitText(th, 1);
+#endif
             Text_SetParams(th, 0, colorId);
             Text_DrawNumber(th, digits[i]);
             PutText(th, &gBG0TilemapBuffer[TILEMAP_INDEX(x - i, y)]);
@@ -639,9 +642,6 @@ struct Text* DrawNumberText(struct Text* th, u16 number, u8 places, s8 x, s8 y, 
         th++;
     }
 
-#ifdef EUROPE
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-#endif
     return th;
 }
 
@@ -671,11 +671,14 @@ struct Text* DrawNumberText_WithReset(struct Text* th, u16 number, u8 numTiles, 
                 InitText(th, 1);
             }
 
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
             Text_SetParams(th, 0, colorId);
+#endif
             Text_DrawNumber(th, digits[i]);
             PutText(th, &gBG0TilemapBuffer[TILEMAP_INDEX(x - i, y)]);
         }
-
         th++;
     }
 
@@ -743,13 +746,16 @@ struct Text* DrawTimeText(struct Text* th, int time, s8 xBase, s8 yBase, u8 colo
 
     xOffset = xBase + 0xFE;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     str = GetStringFromIndex(0x20D); // :[.]
 
     InitText(th, 1);
     Text_SetParams(th, 2, colorId);
     Text_DrawCharacter(th, str);
     PutText(th, &gBG0TilemapBuffer[TILEMAP_INDEX(xOffset, yBase)]);
-
+#endif
     th++;
 
     xOffset = xBase + 0xFF;
@@ -817,10 +823,13 @@ struct Text* DrawTimeText_WithReset(struct Text* th, int time, s8 xBase, s8 yBas
 
     xOffset++;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     th = DrawNumberText_WithReset(th, minutes % 10, 1, xOffset, yBase, colorId);
 
     xOffset = xBase + 0xFE;
-
     str = GetStringFromIndex(0x20D); // :[.]
 
     if (th->chr_position != 0xFFFF) {
@@ -828,6 +837,7 @@ struct Text* DrawTimeText_WithReset(struct Text* th, int time, s8 xBase, s8 yBas
     } else {
         InitText(th, 1);
     }
+#endif
 
     if (drawPunctuation) {
         Text_SetParams(th, 2, colorId);
@@ -1083,9 +1093,6 @@ void sub_8038F78(struct Text* th) {
         i++;
     }
 
-#ifdef EUROPE
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-#endif
     return;
 }
 
@@ -1145,12 +1152,6 @@ void sub_803901C(struct BMDifficultyProc * proc)
 
     PlaySoundEffect(0x80); // Point Up SE
 
-#ifdef EUROPE
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
-#endif
     return;
 }
 
@@ -1173,8 +1174,6 @@ void sub_80390D4(struct BMDifficultyProc* proc) {
             0x5000
         );
     } else {
-#ifdef EUROPE
-#else
         if (proc->labelIndex == 4) {
             DrawTimeText_WithReset(
                 &gUnknown_020038C8[1].text[4][0],
@@ -1199,7 +1198,6 @@ void sub_80390D4(struct BMDifficultyProc* proc) {
         BG_EnableSyncByMask(1);
 
         Proc_Break(proc);
-#endif
     }
 
     return;
