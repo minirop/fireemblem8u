@@ -58,6 +58,9 @@ void AutoGenerateUnitdef(u8 idx, int jid, s8 x_from, s8 y_from, s8 x_to, s8 y_to
     gUdefs[idx].ai[1] = 0;
     gUdefs[idx].ai[2] = 0;
     gUdefs[idx].ai[3] = 0;
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void sub_808679C(void)

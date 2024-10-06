@@ -861,6 +861,10 @@ void DisplayEventMapAnim(ProcPtr parent, int val)
     BG_EnableSyncByMask(3);
     gPaletteBuffer[PAL_BACKDROP_OFFSET] = 0;
     EnablePaletteSync();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void DrawEventMapAnimMaskfx(int index, int mode)
