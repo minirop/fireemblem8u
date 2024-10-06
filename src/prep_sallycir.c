@@ -182,9 +182,13 @@ void SallyCir_Loop(struct SallyCirProc * proc)
 
     proc->unk_29++;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (proc->unk_29 == 40) {
         Proc_Break(proc);
     }
+#endif
 
     return;
 }

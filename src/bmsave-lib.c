@@ -181,6 +181,9 @@ void InitGlobalSaveInfodata()
         info.charKnownFlags[i] = 0;
 
     WriteGlobalSaveInfo(&info);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EraseBonusContentData()
@@ -1214,6 +1217,23 @@ void ModifySaveLinkArenaStruct2B(struct bmsave_unkstruct2 * buf, int val)
     buf->unk[val >> 5] |= (1 << (_val % 0x20));
     WriteLinkArenaStruct2(buf);
 }
+
+#ifdef EUROPE
+void FUN_080a4968()
+{
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+}
+
+void FUN_080a49b0()
+{
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+}
+#endif
 
 void EraseSramDataIfInvalid()
 {

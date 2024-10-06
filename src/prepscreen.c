@@ -52,6 +52,16 @@ int CONST_DATA gUnknown_08A18200[][3] =
 };
 
 // clang-format on
+#ifdef EUROPE
+int FUN_08095558()
+{
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    return 0;
+}
+#endif
 
 //! FE8U = 0x08094FF4
 u8 CanPrepScreenSave(void)
@@ -464,6 +474,10 @@ void InitPrepScreenMainMenu(struct ProcAtMenu* proc)
         SetPrepScreenMenuPosition(1, 6);
 
     SetPrepScreenMenuSelectedItem(proc->cur_cmd);
+
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 int GetLatestUnitIndexInPrepListByUId()

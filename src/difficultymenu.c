@@ -70,10 +70,13 @@ void SaveMenuInitSaveSlotData(u8 slot, struct SaveMenuProc * proc)
         }
         else
         {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
             proc->chapter_idx[slot] = (u8)-1;
             proc->unk_3a[slot] = 0;
             proc->played_time[slot] = 0;
-
+#endif
             gPlayStChapterBits[slot] = 0;
             gPlayStChapterMode[slot] = 0;
 
@@ -380,6 +383,9 @@ void InitDifficultySelectScreen(struct DifficultyMenuProc * proc)
     proc->sprites_proc->unk_2c = gUnknown_08A209FC[proc->current_selection].a;
     proc->sprites_proc->unk_2e = gUnknown_08A209FC[proc->current_selection].b;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -722,8 +728,11 @@ u8 CONST_DATA gUnknown_08A20B14[] =
 void DrawDifficultySprites_Loop(struct DifficultyMenuSpritesProc * proc)
 {
     int i;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     proc->unk_2a++;
+#endif
 
     PutSpriteExt(4, 56, 4, gSprite_DifficultyMenuSelectModeBg, OAM2_PAL(2));
     PutSpriteExt(4, 56, 4, gSprite_DifficultyMenuSelectModeText, OAM2_PAL(4));

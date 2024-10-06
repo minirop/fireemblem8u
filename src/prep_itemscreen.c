@@ -92,6 +92,9 @@ void PrepItemScreen_Init(struct PrepItemScreenProc * proc)
 //! FE8U = 0x08098448
 void DrawFundsSprite_Init(struct DrawFundsSpriteProc * proc)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     Decompress(gUnknown_08A1B1FC, (void *)0x06013000);
     ApplyPalette(gUnknown_08A1B638, proc->pal + 0x10);
     return;
@@ -1243,6 +1246,9 @@ void StartPrepItemTradeScreen(struct PrepItemScreenProc* proc) {
 //! FE8U = 0x08099DE8
 void StartPrepItemUse(struct PrepItemScreenProc* proc) {
     StartPrepItemUseScreen(GetUnitFromPrepList(proc->selectedUnitIdx), proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1514,11 +1520,13 @@ void UpdatePrepItemScreenFace(int slot, struct Unit* unit, u16 x, u16 y, u16 dis
     }
 
     proc->pUnits[slot] = unit;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     proc->xFacePosBySlot[slot] = x;
     proc->yFacePosBySlot[slot] = y;
     proc->faceDispBySlot[slot] = disp;
-
+#endif
     return;
 }
 

@@ -1470,6 +1470,9 @@ void InitPlayerPhaseInterface(void)
         Proc_Start(gProcScr_UnitDisplay_Burst, PROC_TREE_3);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1678,6 +1681,18 @@ void GoalDisplay_Init(struct PlayerInterfaceProc * proc)
 
     proc->unitClock = 1;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1917,6 +1932,9 @@ void MenuButtonDisp_Init(struct PlayerInterfaceProc * proc)
     proc->yHp = 140;
     proc->isRetracting = false;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

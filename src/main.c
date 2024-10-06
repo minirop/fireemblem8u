@@ -25,7 +25,7 @@ const char gYearProjectCreated[] = "_2003";
 void StoreIRQToIRAM();
 
 #ifdef EUROPE
-bool FUN_080a49b0();
+void FUN_080a49b0();
 #endif
 
 void AgbMain()

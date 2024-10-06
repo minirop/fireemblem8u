@@ -791,14 +791,16 @@ void SaveDrawCursor_Loop(struct SaveDrawCursorProc * proc)
     if (proc->unk_38 != 0) {
         PutSpriteExt(4, 6, proc->unk_37, Sprite_08A20570, 0x3000);
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (proc->unk_39 != 0) {
         proc->unk_38 = 0;
     }
 
     proc->cursor_en = 0;
     proc->unk_39 = 1;
-
+#endif
     return;
 }
 
@@ -1020,7 +1022,12 @@ int CONST_DATA SaveMenuSubSelBoxTexts[] = {
 //! FE8U = 0x080AB83C
 void SaveMenuDrawSubSelBox(struct SaveMenuProc * proc, s8 flag)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     SaveMenuDrawSubSelBoxExt(SaveMenuSubSelBoxTexts[BitfileToIndex(proc->main_sel_bitfile)], flag);
+#endif
     if (flag == 0)
         proc->cursor_config = 0;
 }
@@ -1148,7 +1155,10 @@ bool SaveMenuTryMoveSaveSlotCursor(struct SaveMenuProc * proc, s8 position)
 
     case MAIN_MENU_OPTION_RESTART:
     case MAIN_MENU_OPTION_ERASE:
+#ifdef EUROPE
+#else
         flag = 1;
+#endif
         break;
 
     case MAIN_MENU_OPTION_NEW_GAME:
@@ -1174,6 +1184,9 @@ bool SaveMenuTryMoveSaveSlotCursor(struct SaveMenuProc * proc, s8 position)
         else
             proc->sus_slot--;
     }
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#endif
 
     if (proc->main_sel_bitfile == MAIN_MENU_OPTION_INVALID)
         return true;

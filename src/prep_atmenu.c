@@ -131,6 +131,10 @@ void sub_8095C50(int tile, int pal)
     /* "Cahpter 0", "Infomaion" */
     Decompress(gUnknown_08A1AC88, OBJ_VRAM0 + tile);
     ApplyPalette(gPal_SupportScreenBanner, pal + 0x10);
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void AtMenu_Reinitialize(struct ProcAtMenu* proc)
@@ -206,6 +210,10 @@ void AtMenu_Reinitialize(struct ProcAtMenu* proc)
     proc->unk_35 = GetActivePrepMenuItemIndex();
     ParsePrepMenuDescTexts(sub_8095024());
     DrawPrepMenuDescTexts();
+    
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void EndPrepAtMenuIfNoUnitAvailable(struct ProcAtMenu * proc)

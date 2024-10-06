@@ -615,7 +615,11 @@ void Shop_CheckIfConvoyFull(struct ProcShop * proc)
 
 void Shop_ConvoyFullDialogue(struct ProcShop * proc)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     StartShopDialogue(0x8CD, proc);
+#endif
     // SHOP_TYPE_ARMORY: "Your storage is full, too![NL]Rearrange your things![A]"
     // SHOP_TYPE_VENDOR: "Your storage is full,[.][NL]too. Try again later.[.][A]"
     // SHOP_TYPE_SECRET_SHOP: "Heh... Your storage is full,[NL]too. Rearrange things...[A]"
@@ -623,7 +627,11 @@ void Shop_ConvoyFullDialogue(struct ProcShop * proc)
 
 void Shop_AnythingElseDialogue(struct ProcShop * proc)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     StartShopDialogue(0x8A6, proc);
+#endif
     // SHOP_TYPE_ARMORY: "Anything else?"
     // SHOP_TYPE_VENDOR: "Anything else?"
     // SHOP_TYPE_SECRET_SHOP: "Any other requests?[.]"
@@ -1142,10 +1150,14 @@ void DrawShopItemPriceLine(struct Text * th, int item, struct Unit * unit, u16 *
 
     int price = GetItemPurchasePrice(unit, item);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (unit == 0)
         unuseable = true;
     else
         unuseable = IsItemDisplayUsable(unit, item);
+#endif
 
     DrawItemMenuLine(th, item, unuseable, dst);
 

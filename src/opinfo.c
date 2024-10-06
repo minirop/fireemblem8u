@@ -353,6 +353,11 @@ void ClassIntro_Init(struct OpInfoEnterProc* proc) {
 
     BG_EnableSyncByMask(4);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -893,10 +898,14 @@ signed char* sub_80B369C(u8 classId, signed char* buffer) {
         GetStringFromIndexInBuffer(class->nameTextId, buffer);
     }
 
+#ifdef EUROPE
+    //asm("NOP\nNOP\n");
+#else
     str = strstr(buffer, "Kn.");
     if (str != NULL) {
         sprintf(str, "Knight");
     }
+#endif
 
     return buffer;
 }
@@ -1406,6 +1415,9 @@ void ClassStatsDisplay_Init(struct OpInfoGaugeDrawProc* proc) {
 
     ApplyPalettes(gUnknown_08A372C0, 0x14, 2);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

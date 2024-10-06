@@ -366,6 +366,9 @@ void SaveMenu_InitScreen(struct SaveMenuProc * proc)
     EnablePaletteSync();
     SaveMenuPutChapterTitle(proc);
     proc->savedraw = StartSaveDraw(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080A8F04
@@ -393,6 +396,9 @@ void SaveMenu_LoadExtraMenuGraphics(struct SaveMenuProc * proc)
 
     if (proc->jump_label == PL_SAVEMENU_SAVE_SLOT_SEL)
         proc->unk_2f = 0xdc;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080A8F8C
@@ -528,7 +534,10 @@ void SaveMenuWriteNewGame(struct SaveMenuProc * proc)
         break;
     case 2:
         isTutorial = 1;
+#ifdef EUROPE
+#else
         isDifficult = 1;
+#endif
         break;
     }
 
@@ -930,6 +939,9 @@ void SaveMenuScrollBackToMain(struct SaveMenuProc * proc)
         Decompress(Img_GameMainMenuObjs, OBJ_VRAM0 + OBJCHR_SAVEMENU_MAINCHOICE_STR * TILE_SIZE_4BPP);
         Proc_Break(proc);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080A9A68
@@ -1180,6 +1192,9 @@ void sub_80A9E1C(struct SaveMenuProc * proc)
         }
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     if (gKeyStatusPtr->newKeys & A_BUTTON)
     {
         switch (proc->extra_sel_bitfile) {
@@ -1499,6 +1514,10 @@ void SaveMenu_ReloadScreenFormDifficulty(struct SaveMenuProc * proc)
     }
 
     EnablePaletteSync();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080AA458

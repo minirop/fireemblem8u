@@ -79,8 +79,11 @@ void PrepItemList_DrawCurrentOwnerText(struct PrepItemListProc* proc) {
             PutDrawText(PrepItemSuppyTexts.th + 1, gBG0TilemapBuffer + 0x38, 0, 0, 0, GetStringFromIndex(GetUnitFromCharId(pid)->pCharacterData->nameTextId));
         }
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     BG_EnableSyncByMask(1);
+#endif
 
     return;
 }

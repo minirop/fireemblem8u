@@ -639,6 +639,9 @@ void ChapterStatus_Init(struct ChapterStatusProc * proc)
 
     SetDispEnable(0, 0, 0, 0, 0);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -791,6 +794,9 @@ void DrawChapterStatusStatValues(void)
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -858,6 +864,9 @@ void ChapterStatus_DrawText(struct ChapterStatusProc * proc)
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -983,6 +992,9 @@ void StatusScreenSpriteDraw_Init(struct ChapterStatusProc * proc)
     sub_80895B4(0x80, 0x13);
     PutChapterTitleGfx(0xB80, GetChapterTitleWM(&gPlaySt));
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1047,5 +1059,13 @@ void StatusScreenSpriteDraw_Loop(struct ChapterStatusProc * proc)
 
     UpdateStatusFactionSelectorGlow(parent);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
