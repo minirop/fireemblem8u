@@ -163,6 +163,10 @@ void PrepItemUseJuna_OnDraw(struct ProcPrepItemUseJunaFruit *proc, int x, int y,
         proc->width += 2;
 
     proc->height = 2;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void PrepItemUseJuna_OnInit(struct ProcPrepItemUseJunaFruit * proc)

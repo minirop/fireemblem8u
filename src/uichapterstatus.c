@@ -597,6 +597,9 @@ void ChapterStatus_Init(struct ChapterStatusProc* proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 0;
     gLCDControlBuffer.dispcnt.obj_on = 0;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -731,6 +734,9 @@ void DrawChapterStatusStatValues() {
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -786,6 +792,9 @@ void ChapterStatus_DrawText(struct ChapterStatusProc* proc) {
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -894,6 +903,9 @@ void sub_808E7B4(struct ChapterStatusProc* proc) {
 
     PutChapterTitleGfx(0xB80, GetChapterTitleWM(&gPlaySt));
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -945,5 +957,13 @@ void sub_808E818(struct ChapterStatusProc* proc) {
 
     sub_808DE38(parent);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }

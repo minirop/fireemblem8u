@@ -703,6 +703,9 @@ void SoundRoomUi_Init(struct SoundRoomProc * proc)
     StartParallelWorker(TickCurrentSongTime, proc);
     Proc_Start(gProcScr_VolumeGraphBuffer, proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

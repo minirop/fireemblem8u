@@ -901,11 +901,13 @@ void BgAffinRotScaling(u8 bg, s16 angle, s16 x_center, s16 y_center, s16 sx, s16
     data.sx = 0x10000 / sx;
     data.sy = 0x10000 / sy;
     data.alpha = angle * 0x10;
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     dst = &gLCDControlBuffer.bg3affin;
     if (bg == BG_2)
         dst = &gLCDControlBuffer.bg2affin;
-
+#endif
     BgAffineSet(&data, dst, 1);
 }
 
@@ -928,7 +930,10 @@ void BgAffinScaling(u8 bg, s16 sy, s16 sx)
     affin->pb = (affin->pb * sy) >> 8;
     affin->pd = (affin->pd * sy) >> 8;
     affin->pa = (affin->pa * sx) >> 8;
+#ifdef EUROPE
+#else
     affin->pc = (affin->pc * sx) >> 8;
+#endif
 }
 
 void BgAffinAnchoring(u8 bg, s16 q0_x, s16 q0_y, s16 p0_x, s16 p0_y)
@@ -947,7 +952,11 @@ void BgAffinAnchoring(u8 bg, s16 q0_x, s16 q0_y, s16 p0_x, s16 p0_y)
         affin = &gLCDControlBuffer.bg2affin;
 
     affin->dx = affin->pa * (-q0_x) + affin->pb * (-q0_y) + p0_x * 0x100;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     affin->dy = affin->pc * (-q0_x) + affin->pd * (-q0_y) + p0_y * 0x100;
+#endif
 }
 
 void BgAffinRotScalingHighPrecision(u8 bg, int angle, int texX, int texY, int sx, int sy)

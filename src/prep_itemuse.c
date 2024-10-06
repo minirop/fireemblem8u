@@ -711,6 +711,9 @@ void PrepItemUse_PostPromotion(struct ProcPrepItemUse * proc)
         proc->slot--;
     
     Proc_Break(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void PrepItemUse_ResetBgmAfterPromo(struct ProcPrepItemUse * proc)
@@ -741,6 +744,9 @@ void StartPrepItemUseScreen(struct Unit *unit, ProcPtr parent)
     struct ProcPrepItemUse *proc;
     proc = Proc_StartBlocking(ProcScr_PrepItemUseScreen, parent);
     proc->unit = unit;
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 CONST_DATA struct ProcCmd ProcScr_PrepItemUseScreen[] = {
