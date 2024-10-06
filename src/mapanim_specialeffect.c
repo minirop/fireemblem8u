@@ -30,6 +30,15 @@ void MapAnim_BeginMISSAnim(struct Unit * unit)
         16 * (SCREEN_TILE_X(unit->xPos)) + 8,
         16 * (SCREEN_TILE_Y(unit->yPos)) + 16,
         TILEREF(BM_OBJCHR_BANIM_EFFECT, 0), 0, 2);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void MapAnim_BeginNODAMAGEAnim(struct Unit * unit)
@@ -43,6 +52,15 @@ void MapAnim_BeginNODAMAGEAnim(struct Unit * unit)
         16 * (SCREEN_TILE_X(unit->xPos)) + 8,
         16 * (SCREEN_TILE_Y(unit->yPos)) + 16,
         TILEREF(BM_OBJCHR_BANIM_EFFECT, 0), 0, 2);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 CONST_DATA struct ProcCmd ProcScr_MapAnimWallBreak[] = {

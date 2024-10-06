@@ -660,8 +660,10 @@ void sub_808294C(void)
 void sub_80829A4(s16 * r6, s16 r1, s16 r8, s16 r3, s16 sl, s16 r4, s16 ip)
 {
     int r7;
-
+#ifdef EUROPE
+#else
     r6 += 1;
+#endif
 
     for (r7 = 1; r7 < DISPLAY_HEIGHT; r7 += 2)
     {

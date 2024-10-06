@@ -348,9 +348,13 @@ int GetCursorQuadrant() {
 }
 
 void GetHpBarLeftTile(s16* buffer, s16 hp, int tileBase) {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     if (hp > 5) {
         hp = 5;
     }
+#endif
 
     *buffer = hp + tileBase;
 
@@ -384,10 +388,13 @@ void GetHpBarMidTiles(s16* buffer, s16 hp, int tileBase) {
 
 void GetHpBarRightTile(s16* buffer, s16 hp, int tileBase) {
     int base;
-
+#ifdef EUROPE
+    //asm("NOP\nNOP\n");
+#else
     if (hp >= 5) {
         hp = 5;
     }
+#endif
 
     if (hp < 0) {
         hp = 0;
@@ -749,15 +756,22 @@ void MMB_DrawStatusText(s16* buffer, struct Unit* unit) {
     buffer[5] = 0;
     buffer[6] = unit->statusDuration + 0x1128;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
 void DrawUnitDisplayHpOrStatus(struct PlayerInterfaceProc* proc, struct Unit* unit) {
     s16 frameCount = proc->unk_44;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (unit->statusIndex == UNIT_STATUS_RECOVER) {
         frameCount = 0;
     }
+#endif
 
     if ((frameCount & 0x3F) == 0) {
         if ((frameCount & 0x40) != 0) {

@@ -45,6 +45,9 @@ void sub_80895B4(int config, int palId)
 
 void PutChapterTitleGfx(int chr, u32 titleId)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     if (titleId > 0x108)
         titleId = 0x54;
 
