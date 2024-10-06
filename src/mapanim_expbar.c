@@ -57,6 +57,9 @@ void ProcMAExpBar_OnDraw(struct MAExpBarProc* proc)
         TILEREF(512, BM_BGPAL_BANIM_UNK5));
 
     DrawMAExpBar(6, 8, proc->expFrom);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void ProcMAExpBar_PlaySound74(void)

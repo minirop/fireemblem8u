@@ -1011,8 +1011,11 @@ int EvCheck0B_AREA(struct EventInfo* info) {
 
     if ((x1 <= x && x <= x2) || (x2 <= x && x <= x1)) {
         if ((y1 <= y && y <= y2) || (y2 <= y && y <= y1)) {
+#ifdef EUROPE
+#else
             info->script = ((struct EvCheck0B *)info->listScript)->script;
             info->flag = EVT_CMD_HI(((struct EvCheck0B *)info->listScript)->unk0);
+#endif
 
             return 1;
         }
@@ -1452,7 +1455,10 @@ void StartAvailableTileEvent(s8 x, s8 y) {
 
     info.listScript = GetChapterEventDataPointer(gPlaySt.chapterIndex)->locationBasedEvents;
     info.xPos = x;
+#ifdef EUROPE
+#else
     info.yPos = y;
+#endif
 
     if (SearchAvailableEvent(&info) == NULL) {
         return;
@@ -1695,8 +1701,11 @@ s8 StartDestSelectedEvent(void) {
     if (GetBattleMapKind() == BATTLEMAP_KIND_SKIRMISH) {
         return 0;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     ret = RunTutorialEvent(TUTORIAL_EVT_TYPE_DESTSELECTED);
+#endif
 
     info.listScript = GetChapterEventDataPointer(gPlaySt.chapterIndex)->specialEventsWhenDestSelected;
 
@@ -1718,7 +1727,11 @@ s8 StartAfterUnitMovedEvent(void) {
         return 0;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     ret = RunTutorialEvent(TUTORIAL_EVT_TYPE_AFTERMOVE);
+#endif
 
     info.listScript = GetChapterEventDataPointer(gPlaySt.chapterIndex)->specialEventsAfterUnitMoved;
 

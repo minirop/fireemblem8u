@@ -1532,8 +1532,12 @@ void SortMus(void)
             }
         }
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     // Set obj layer based on order
     for (i = 0; i < count; ++i)
         procs[i]->sprite_anim->objLayer = 10 - i;
+#endif
 }

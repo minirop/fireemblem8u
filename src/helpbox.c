@@ -52,6 +52,12 @@ void LoadHelpBoxGfx(void * vram, int palId)
     ApplyPalette(Pal_HelpBox, palId);
 
     gHelpBoxSt.oam2_base = (((u32)vram << 0x11) >> 0x16) + (palId & 0xF) * 0x1000;
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080898C4
@@ -86,6 +92,11 @@ void sub_80898C4(void* vram, int palId) {
 
     gHelpBoxSt.oam2_base = (((u32)vram << 0x11) >> 0x16) + (palId & 0xF) * 0x1000;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -117,10 +128,13 @@ void DisplayHelpBoxObj(int x, int y, int w, int h, int unk) {
     if (h < 0x10) {
         h = 0x10;
     }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
     if (h > 0x30) {
         h = 0x30;
     }
+#endif
 
     xCount = (w + 0x1f) / 0x20;
     yCount = (h + 0x0f) / 0x10;
@@ -238,6 +252,11 @@ int DrawHelpBoxWeaponLabels(int item)
 //! FE8U = 0x08089CD4
 void DrawHelpBoxWeaponStats(int item)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     Text_InsertDrawString(&gHelpBoxSt.text[0], 32, 7, GetItemDisplayRankString(item));
     Text_InsertDrawString(&gHelpBoxSt.text[0], 67, 7, GetItemDisplayRangeString(item));
     Text_InsertDrawNumberOrBlank(&gHelpBoxSt.text[0], 129, 7, GetItemWeight(item));
@@ -250,6 +269,9 @@ void DrawHelpBoxWeaponStats(int item)
 //! FE8U = 0x08089D50
 int DrawHelpBoxStaffLabels(int item)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     Text_InsertDrawString(&gHelpBoxSt.text[0], 0, 8, GetStringFromIndex(0x509)); // TODO: msg id "Staff[.]"
     Text_InsertDrawString(&gHelpBoxSt.text[0], 30, 7, GetItemDisplayRankString(item));
     Text_InsertDrawString(&gHelpBoxSt.text[0], 48, 8, GetStringFromIndex(0x500)); // TODO: msg id "Rng[.]"
@@ -284,6 +306,9 @@ void DrawHelpBoxSaveMenuStats(void)
     } else {
         Text_InsertDrawString(&gHelpBoxSt.text[0], 108, 7, GetStringFromIndex(0x535));
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 
     return;
 }
@@ -963,6 +988,11 @@ void InitBoxDialogue(void * vram_dst, int pad_idx) {
         PlaySoundEffect(0x2E6);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

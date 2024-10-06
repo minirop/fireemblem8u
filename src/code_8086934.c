@@ -47,6 +47,8 @@ void sub_808683C(void)
             r = 31;
         }
 
+#ifdef EUROPE
+#else
         if (g > 31)
         {
             g = 31;
@@ -56,6 +58,7 @@ void sub_808683C(void)
         {
             b = 31;
         }
+#endif
 
         color = r;
         color |= g << 5;

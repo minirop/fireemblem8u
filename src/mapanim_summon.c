@@ -141,6 +141,9 @@ void GenerateSummonUnitDef(void)
     unit->level = gActiveUnit->level;
     unit->exp   = UNIT_EXP_DISABLED;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (gActiveUnit->level <= 5)
         unit->ranks[ITYPE_AXE] = WPN_EXP_D;
     else if (gActiveUnit->level <= 10)
@@ -149,6 +152,7 @@ void GenerateSummonUnitDef(void)
         unit->ranks[ITYPE_AXE] = WPN_EXP_B;
     else if (gActiveUnit->level <= 20)
         unit->ranks[ITYPE_AXE] = WPN_EXP_A;
+#endif
 }
 
 void ProcSummonDK_InitCounters(struct SumProc* proc)
@@ -180,6 +184,9 @@ s8 CheckCanSummon(struct SumProc* proc)
         }
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     if (proc->counter < 8 && proc->monsters < 4)
         return FALSE;
 
@@ -235,9 +242,11 @@ s8 SelectSummonPos(int x, int y, struct SumThing* result)
 
     if (!count)
         return -1;
-
+#ifdef EUROPE
+#else
     chosen = NextRN_N(count);
     *result = array[chosen];
+#endif
     return 1;
 }
 
@@ -252,7 +261,10 @@ void SelSumPosAndMoveCamera(struct SumProc* proc, s8 x, s8 y, short arg3)
         Proc_Goto(proc, arg3);
     } else {
         proc->x = thing.x;
+#ifdef EUROPE
+#else
         proc->y = thing.y;
+#endif
 
         EnsureCameraOntoPosition(proc, proc->x, proc->y);
     }

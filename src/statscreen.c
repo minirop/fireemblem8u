@@ -473,6 +473,14 @@ void DisplayBwl(void)
 {
     struct UnitUsageStats* stats = GetPidStats(gStatScreen.unit->pCharacterData->number);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
+
     if (!stats)
         return;
 
@@ -1268,6 +1276,10 @@ void DisplayPageNameSprite(int pageid)
         sizeof(u16));
 
     EnablePaletteSync();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void PageNameCtrl_OnInit(struct StatScreenPageNameProc* proc)
@@ -1591,6 +1603,10 @@ void StatScreen_InitDisplay(struct Proc* proc)
     gStatScreen.mu = NULL;
 
     ClearSlide(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void StatScreen_Display(struct Proc* proc)
@@ -1837,8 +1853,12 @@ void HbPopulate_SSPower(struct HelpBoxProc* proc)
 {
     if (UnitHasMagicRank(gStatScreen.unit))
         proc->mid = 0x547; // TODO: mid constants
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     else
         proc->mid = 0x546; // TODO: mid constants
+#endif
 }
 
 void HbRedirect_SSItem(struct HelpBoxProc* proc)
@@ -1876,8 +1896,12 @@ void HbPopulate_SSCharacter(struct HelpBoxProc* proc)
 
     if (midDesc)
         proc->mid = midDesc;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     else
         proc->mid = 0x6BE; // TODO: mid constants
+#endif
 }
 
 void HbPopulate_SSClass(struct HelpBoxProc* proc)

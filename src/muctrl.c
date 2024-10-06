@@ -60,7 +60,10 @@ void MuCtr_StartDefinedMove(struct Unit * unit, const struct REDA * redas, s16 c
     struct MuCtrlProc * proc = Proc_Start(ProcScr_MuCtrl, PROC_TREE_5);
     switch (count) {
     case 0:
+#ifdef EUROPE
+#else
         redas = NULL;
+#endif
         break;
 
     case 1:
@@ -94,9 +97,12 @@ void MuCtr_StartMoveTowards(struct Unit * unit, s8 x, s8 y, u8 flagsA, u16 flags
 
     reda->flags = flagsA;
 
+#ifdef EUROPE
+#else
     reda->a = 0;
     reda->b = 0;
     reda->delayFrames = 0;
+#endif
 
     MuCtr_InitDefinedMove(proc, unit, reda, 1, flagsB);
 }
@@ -227,7 +233,10 @@ void GenUnitDefinitionFinalPosition(const struct UnitDefinition * def, s8 * xOut
     else
     {
         *xOut = def->xPosition;
+#ifdef EUROPE
+#else
         *yOut = def->yPosition;
+#endif
     }
 
     return;
@@ -521,6 +530,9 @@ void AdjustNewUnitPosition(struct Unit * unit, struct Vec2 * pos, u16 flags)
             pos->y = buf[random].y;
         }
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     else
     {
         if ((flags & 1) != 0)
@@ -531,7 +543,7 @@ void AdjustNewUnitPosition(struct Unit * unit, struct Vec2 * pos, u16 flags)
             }
         }
     }
-
+#endif
     return;
 }
 
@@ -564,9 +576,13 @@ u8 * sub_807A644(struct Unit * unit, struct Vec2 * pos, s8 flag)
             y = pos->y;
             terrainFlag = 0;
         }
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
         GenerateExtendedMovementMapOnRange(unit->xPos, unit->yPos, unit->pClassData->pMovCostTable[0]);
         GenerateBestMovementScript(x, y, gWorkingMovementScript);
+#endif
 
         if (terrainFlag != 0)
         {

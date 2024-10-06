@@ -157,7 +157,10 @@ void sub_807BCA8(struct MAInfoFrameProc* proc)
         if (r4 != gManimSt.actor[i].hp_displayed_q4) {
             gManimSt.actor[i].hp_displayed_q4 = r4;
             sub_807BD54(proc, i);
+#ifdef EUROPE
+#else
             updated = TRUE;
+#endif
         }
     }
 
