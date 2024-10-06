@@ -322,16 +322,19 @@ void GmapEffect_80C119C(struct GmapEffectProc * proc)
                 layer = 0xc;
                 oam2Layer = OAM2_LAYER(3);
             }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
             else
             {
                 layer = 0xd;
                 oam2Layer = OAM2_LAYER(2);
             }
+#endif
 
             PutSprite(layer, xOam1, yOam0, ptr->sprite, ptr->oam2 + OAM2_CHR(0x180) + OAM2_PAL(6) + oam2Layer);
         }
     }
-
     return;
 }
 

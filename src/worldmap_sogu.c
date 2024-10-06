@@ -13,7 +13,11 @@ bool GmapSugoAdvance(s16 x, s16 y, s16 * outx, s16 * outy)
     *&_x = GM_SCREEN->x;
     *&_y = GM_SCREEN->y;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     *outx = x - _x;
+#endif
     *outy = y - _y;
 
     if ((u16)((y - _y) + 0x20) < 0xE0 && (u16)(*outx + 0x20) < 0x130)

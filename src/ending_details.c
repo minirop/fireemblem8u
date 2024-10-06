@@ -769,6 +769,9 @@ void SoloEndingBattleDisp_Init(struct EndingBattleDisplayProc* proc) {
     proc->unk_34 = 0;
     SetDefaultColorEffects();
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -826,7 +829,10 @@ void sub_80B6F34(struct EndingBattleDisplayProc* proc) {
 
     sub_80B6920();
 
+#ifdef EUROPE
+#else
     sub_80B6CA8(proc);
+#endif
 
     BG_Fill(gSoloEndingBattleDispConf[0], 0);
     BG_Fill(gSoloEndingBattleDispConf[1], 0);
@@ -1079,6 +1085,10 @@ void SetupFinScreenGfx(void) {
 
     BG_EnableSyncByMask(4);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

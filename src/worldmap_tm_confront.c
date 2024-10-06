@@ -128,8 +128,12 @@ void GmTmConfront_Loop_MoveUnitPositions(struct GmapTmConfrontProc * proc)
                 proc->unk_38[i].x, proc->unk_38[i].y);
         }
 
+#ifdef EUROPE
+        asm("NOP\nNOP\n");
+#else
         proc->unk_2a = 0;
         Proc_Break(proc);
+#endif
     }
 
     return;
@@ -169,6 +173,11 @@ void GmTmConfront_StartAnim(struct GmapTmConfrontProc * proc)
 
     PlaySoundEffect(0x314);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

@@ -247,9 +247,13 @@ int sub_80BD6A8(struct GMapMuPrimProc * proc)
 
     for (i = 0; i < proc->unk_40; i++)
     {
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         a += proc->unk_34[i].a;
         b += proc->unk_34[i].b;
-
+#endif
         unk = sub_80C0834(0, 0, a, b, 8);
 
         if (unk > 35)
@@ -456,7 +460,11 @@ void GmMuPrim_80BDA78(struct GMapMuPrimProc * proc)
         }
 
         Proc_Break(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
         proc->flags_0 = 0;
+#endif
     }
 
     return;
@@ -958,6 +966,9 @@ void GmMu_SetPosition(struct GMapMuProc * muProc, int index, s16 xBase, s16 yBas
 
     muPrimProc->unk_40 = 0;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
