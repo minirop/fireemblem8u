@@ -33,6 +33,9 @@ void OpAnimInit(struct ProcOpAnim * proc)
     CpuFastFill16(-1, OBJ_VRAM0 + 0x7800, 0x800);
     SetNextGameActionId(GAME_ACTION_PLAYED_THROUGH);
     NewOpAnimfxTerminator(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void OpAnimAllBlack(struct ProcOpAnimFadeIn * proc)

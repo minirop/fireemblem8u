@@ -87,7 +87,13 @@ void sub_80B82C8(int bg, u32 offset, int xIn, int yIn, u8 flip)
 
     BG_EnableSyncByMask(1 << (bg));
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
     BG_SetPosition(bg, bgX, y_);
+#endif
 }
 
 //! FE8U = 0x080B8350

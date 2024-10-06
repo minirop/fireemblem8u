@@ -140,6 +140,9 @@ void GMScreenVSync_Loop(struct GMapScreenVSyncProc * proc)
 {
     int i;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     if (proc->unk_38 == 0)
     {
         return;
@@ -394,6 +397,8 @@ void sub_80BA8A0(struct GmScreenProc * proc)
 
         if (r4 < 1)
             sub_80BA6DC(proc->unk_48, r6, r5, r4, r9, 0x1f, 1);
+#ifdef EUROPE
+#else
         else
         {
             s16 tmp;
@@ -402,8 +407,12 @@ void sub_80BA8A0(struct GmScreenProc * proc)
             tmp = (0x1f - iVar6);
             sub_80BA6DC(proc->unk_48, r6 + iVar6, r5, iVar6 + r4, r9, tmp, 1);
         }
+#endif
         proc->unk_2c = proc->unk_2e;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080BAB00

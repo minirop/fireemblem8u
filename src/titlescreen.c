@@ -242,6 +242,9 @@ void Title_SetupMainGraphics(struct TitleScreenProc * proc)
     }
 
     proc->timer++;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080C5848

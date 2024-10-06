@@ -834,6 +834,10 @@ void StartWorldMapPlayerInterface(struct Proc * parent)
     ResetTextFont();
     Proc_Start(ProcScr_GMapPlayerInterface, parent->proc_parent);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

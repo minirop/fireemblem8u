@@ -76,12 +76,19 @@ void GmapUnit_Loop(struct GMapUnitProc * proc)
         y = ((struct GmScreenProc *)(proc->proc_parent))->y;
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     xOam1 = proc->x - x;
     yOam0 = proc->y - y;
+#endif
 
     if (((u16)(yOam0 + 0x20) < 0xe0) && ((u16)(xOam1 + 0x10) < 0x110))
     {
+#ifdef EUROPE
+#else
         xOam1 = xOam1 & 0x1ff;
+#endif
         yOam0 = yOam0 & 0xff;
 
         if (proc->animId == 4)

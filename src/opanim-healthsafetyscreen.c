@@ -123,6 +123,9 @@ void GameIntroNintendoFadeIN(struct ProcOpAnimHS * proc)
         Proc_Break(proc);
     }
     TryTickHSScreenExit(proc);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void GameIntroNintendoFadeOUT(struct ProcOpAnimHS * proc)
@@ -208,6 +211,11 @@ void PrepareHealthAndSafetyScreen(struct ProcOpAnimHS * proc)
     SetDispEnable(0, 1, 0, 0, 0);
     proc->palette_timer = 0;
     SetKeyStatus_IgnoreMask(0x3FF);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void GameIntroHealthSafetyFadeIN(struct ProcOpAnimHS * proc)
