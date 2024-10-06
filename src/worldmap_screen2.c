@@ -251,6 +251,10 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
         }
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

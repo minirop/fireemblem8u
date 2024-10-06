@@ -66,7 +66,11 @@ void GmapRmUpdateExt_ScrollPosition(struct ProcGmapRmUpdate * proc)
     else
     {
         GmapRm_SetPosition(proc->x1, proc->y1);
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
         Proc_Break(proc);
+#endif
     }
 }
 
@@ -719,6 +723,9 @@ void DrawWmNationHighLightMapGfx(int chr, int index)
     void * vram = (void *)(0x06010000 + chr * 0x1000);
     Decompress(GfxSet_WmNationMap[index].img, vram);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

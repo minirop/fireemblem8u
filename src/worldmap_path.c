@@ -1594,8 +1594,11 @@ int sub_80BCAB8(struct Unknown0201B0D8 * buf, struct GMapNodeLink * links, s8 pa
 
                     return 1;
                 }
-
+#ifdef EUROPE
+                asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
                 sub_80BCAB8(buf, links, param_4, connections[i], param_5, param_6 + 1);
+#endif
             }
         }
     }
@@ -1706,8 +1709,12 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
                     return 1;
                 }
             }
-
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
             sub_80BCBAC(buf, param_2, param_4, connections[i], param_5, param_6 + 1, param_7);
+#endif
         }
     }
 
@@ -1738,7 +1745,11 @@ s8 sub_80BCCFC(s8 a, s8 b, s8 flag)
     r6 = &gUnknown_0201B0D8;
     r6->unk_20 = 0x10;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     CpuFill32(0, r6->unk_00, 0x10);
+#endif
     CpuFill32(0, r6->unk_10, 0x10);
 
     r6->unk_00[0] = a;
@@ -1806,8 +1817,13 @@ int sub_80BCE34(int nodeA, int nodeB, s16 c, u16 * d, int * e, int f)
 
     nodeId = pathId[gWMPathData].node[startingNodeIdx];
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     e[0] = nodeId[gWMNodeData].x << (f);
     e[1] = nodeId[gWMNodeData].y << (f);
+#endif
 
     d++;
     e += 2;

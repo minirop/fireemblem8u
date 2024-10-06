@@ -406,6 +406,9 @@ void WorldmapStatus_PutTimeAndGold(void)
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

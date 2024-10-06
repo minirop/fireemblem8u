@@ -142,6 +142,9 @@ void ArenaUi_WelcomeDialogue(ProcPtr proc) {
         // TODO: msgid "Welcome to the arena.[.][A][NL]Oh! It's you again.[.][A][NL2][NL]I've lost a lot of gold[.][NL]thanks to you...[A][NL2][NL]If you want to continue,[A][NL]we're going to have to[NL]do things differently.[A][NL2][NL]I'm going to prepare some[.][NL]more challenging foes.[A]"
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

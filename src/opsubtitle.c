@@ -327,6 +327,10 @@ void sub_80C4C60(struct OpSubtitleProc* proc) {
 
     proc->timer_2c = 0;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -346,6 +350,10 @@ void sub_80C4CD0(struct OpSubtitleProc* proc) {
 
     proc->timer_2c = 0;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -360,6 +368,9 @@ void sub_80C4D54(int index) {
 
     BG_EnableSyncByMask(BG0_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -390,6 +401,9 @@ void sub_80C4DA0(struct OpSubtitleProc* proc) {
 
     OpSubtitle_HandleStartPress(proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -503,6 +517,9 @@ void sub_80C4F60(struct OpSubtitleProc* proc) {
 
     OpSubtitle_HandleStartPress(proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -592,6 +609,9 @@ void sub_80C5104(struct OpSubtitleProc* proc) {
 
     OpSubtitle_HandleStartPress(proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

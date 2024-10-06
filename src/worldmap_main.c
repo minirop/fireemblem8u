@@ -754,10 +754,14 @@ void WmMain_MoveCursor(struct WorldMapMainProc * proc)
 
     if ((xCursorPrev != xCursorNew) || (yCursorPrev != yCursorNew))
     {
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\n");
+#else
         PlaySoundEffect(0x65);
 
         pos.x = xCursorNew * 16 + 8;
         pos.y = yCursorNew * 16 + 8;
+#endif
 
         StartGmMoveCursor(0, &pos, duration, 0, proc);
     }
@@ -1399,7 +1403,11 @@ void sub_80B9AEC(struct WorldMapMainProc * proc)
             continue;
         }
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         gGMData.unk_cc = i - 4;
+#endif
         GmMu_RemoveUnit(proc->gm_mu, i);
     }
 
@@ -1426,6 +1434,9 @@ void WorldMap_CallIntroEvent(struct WorldMapMainProc * proc)
     gGMData.sprite_disp = 0;
 
     WmRemoveRandomMonsters();
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 //! FE8U = 0x080B9BA4
@@ -1550,10 +1561,15 @@ void WorldMap_GenerateRandomMonsters(ProcPtr proc)
 
     if (flag)
     {
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#else
         NewGmapTimeMons(NULL, &monster_amt);
+#endif
         if (monster_amt > 0)
             Proc_Goto(proc, 2);
     }
+
     WmShowMonsters();
 }
 

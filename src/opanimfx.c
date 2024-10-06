@@ -380,7 +380,11 @@ void TsaModifyFirstPalMaybe(s16 end, s16 start, s16 unused, u16 bg, u16 * src1, 
         else
             SetFirstPalDirectly(src + (i & 0x1f), dst + (i & 0x1f), 0xf);
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     BG_SetPosition(bg, end + 0x10, 0);
+#endif
 }
 
 //! FE8U = 0x080C689C
@@ -433,6 +437,10 @@ void sub_80C689C(s16 end, s16 start, s16 offset, u16 bg, u16 * src1, u16 * src2,
             break;
         }
 
+#ifdef EUROPE
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+        asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
         if (flag == 0)
         {
             CopyFirstPalDirectly(src + (i & 0x1f), dst + (i & 0x1f));
@@ -441,6 +449,7 @@ void sub_80C689C(s16 end, s16 start, s16 offset, u16 bg, u16 * src1, u16 * src2,
         {
             SetFirstPalDirectly(src + (i & 0x1f), dst + (i & 0x1f), 0xf);
         }
+#endif
     }
 
     BG_SetPosition(bg, end, 0);

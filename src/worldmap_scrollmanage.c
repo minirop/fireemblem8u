@@ -216,8 +216,11 @@ void StartGmScroll(s16 xStart, s16 yStart, s16 xEnd, s16 yEnd, s16 speed, s16 de
     info.delay = delay;
 
     StartGmScrollManage(&info, worldMapProc);
-
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#else
     GM_CURSOR->unk_32--;
+#endif
 }
 
 bool CheckGmScrolling(void)

@@ -62,6 +62,9 @@ void LoadClassReelFontPalette(struct ProcPromoSel *proc, int class_id) {
 
     Decompress(&gUnknown_08A36338, OBJ_VRAM0 + 0x1000);
     ApplyPalettes(gUnknown_08A372C0, 0x14, 0x2);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void LoadClassNameInClassReelFont(struct ProcPromoSel *proc) {
@@ -86,6 +89,11 @@ void LoadClassNameInClassReelFont(struct ProcPromoSel *proc) {
 
     if (proc->u44 < 0xff)
         proc->u44++;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#endif
 }
 
 void ClassChgLoadEfxTerrain(void)
@@ -176,6 +184,9 @@ void RegisterTsaWithOffset(u16 *_dst, u16 *_src, u32 offset) {
         }
         i--;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 ProcPtr StartPromoClassSelect(ProcPtr parent)
@@ -388,9 +399,14 @@ void LoadBattleSpritesForBranchScreen(struct ProcPromoSel *proc) {
         }
     }
 D1AC:
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+    asm("NOP\nNOP\n");
+#else
     if ((u8) sub_805A96C(tmp)) {
         sub_805A990(tmp);
     }
+#endif
     LoadClassNameInClassReelFont(proc);
     return;
 }
@@ -519,8 +535,11 @@ void sub_80CD34C(void)
 
 void sub_80CD408(u32 a, s16 b, s16 c) {
     gUnknown_0201FADC.terrain_l = a;
+#ifdef EUROPE
+#else
     gUnknown_0201FADC.pal_l = 0xe;
     gUnknown_0201FADC.chr_l = 0x380;
+#endif
     gUnknown_0201FADC.terrain_r = a;
     gUnknown_0201FADC.pal_r = 0xf;
     gUnknown_0201FADC.chr_r = 0xf0 << 2;

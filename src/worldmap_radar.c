@@ -443,6 +443,9 @@ void StartWorldMapMinimapCore(struct Proc * proc)
 
     Proc_Start(ProcScr_GmapRader, proc->proc_parent);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
