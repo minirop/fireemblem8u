@@ -490,8 +490,13 @@ void sub_8090418(struct UnitListScreenProc * proc, s8 unk)
 
         if (proc->unk_3e < (i - 4) * 16)
         {
+#ifdef EUROPE
+            asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+            asm("NOP\nNOP\n");
+#else
             proc->unk_2c = 4;
             proc->unk_3e = (i - 4) * 16;
+#endif
             return;
         }
 
@@ -1343,12 +1348,16 @@ void sub_80917D8(struct UnitListScreenProc * proc)
     int i;
     u8 unk_32;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#else
     if (proc->helpActive != 0 && (gKeyStatusPtr->newKeys & (B_BUTTON | R_BUTTON)) != 0)
     {
         CloseHelpBox();
         proc->helpActive = 0;
         return;
     }
+#endif
 
     if ((gKeyStatusPtr->newKeys & A_BUTTON) != 0 && proc->helpActive == 0)
     {
@@ -1520,6 +1529,9 @@ void sub_8091AEC(struct UnitListScreenProc * proc)
             gUnitListScreenFields[proc->pageTarget][proc->unk_2d].helpTextId);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -2107,6 +2119,9 @@ void UnitList_DrawColumnNames(u16 * tm, u8 page)
 
     BG_EnableSyncByMask(BG2_SYNC_BIT);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP");
+#endif
     return;
 }
 
@@ -2447,8 +2462,10 @@ void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 
         }
     }
 
+#ifdef EUROPE
+#else
     BG_EnableSyncByMask(BG0_SYNC_BIT);
-
+#endif
     return;
 }
 

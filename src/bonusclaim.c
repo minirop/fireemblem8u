@@ -269,6 +269,9 @@ void DrawBonusClaimItemText(int idx) {
 
     BG_EnableSyncByMask(4);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 
@@ -713,6 +716,9 @@ void BonusClaim_Loop_SelectTargetKeyHandler(struct BonusClaimProc * proc)
         ShowSysHandCursor(92, proc->submenuIndex * 16 + 48, 12, 0x800);
     }
 
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
     return;
 }
 

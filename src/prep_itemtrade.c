@@ -159,8 +159,10 @@ void DrawPrepScreenItems(u16 * tm, struct Text* th, struct Unit* unit, u8 checkP
         } else {
             isUsable = IsItemDisplayUsable(unit, item);
         }
-
+#ifdef EUROPE
+#else
         ClearText(th);
+#endif
         PutDrawText(
             th,
             tm + i * 0x40 + 2,

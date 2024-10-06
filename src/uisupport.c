@@ -396,6 +396,10 @@ void SupportScreen_OnInit(struct SupportScreenProc* proc) {
 void DrawSupportBannerSprites_Init(struct Proc* proc) {
     Decompress(gGfx_SupportMenu, (void*)0x06017800);
     ApplyPalette(gPal_SupportMenu, proc->unk34 + 0x10);
+
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -598,6 +602,9 @@ void SupportScreen_SetupGraphics(struct SupportScreenProc* proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 1;
     gLCDControlBuffer.dispcnt.obj_on = 1;
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 
@@ -1373,6 +1380,9 @@ void SupportSubScreen_SetupGraphics(struct SubScreenProc* proc) {
 
     StartParallelWorker(DrawSupportSubScreenSprites, proc);
 
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     return;
 }
 

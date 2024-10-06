@@ -64,7 +64,10 @@ void PrepUnit_DrawUnitListNames(struct ProcPrepUnit *proc, int line)
             GetStringFromIndex(unit->pCharacterData->nameTextId) );
     }
 
+#ifdef EUROPE
+#else
     BG_EnableSyncByMask(BG2_SYNC_BIT);
+#endif
 }
 
 void PrepUpdateMenuTsaScroll(int val)
@@ -133,6 +136,11 @@ void PrepUnit_InitTexts()
     InitText(&gPrepUnitTexts[0x13], 7);
     InitText(&gPrepUnitTexts[0x14], 10);
     InitText(&gPrepUnitTexts[0x15], 12);
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void PrepUnit_InitGfx()
@@ -152,6 +160,9 @@ void PrepUnit_InitGfx()
     Decompress(gUnknown_08A1D510, (void*)0x6010800);
     ApplyPalette(Pal_MapBattleInfoNum, 0x19);
     EnablePaletteSync();
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void PrepUnit_InitSMS(struct ProcPrepUnit *proc)
@@ -233,6 +244,47 @@ void PrepUnit_DrawUnitItems(struct Unit *unit)
 
 void PrepUnit_DrawPickLeftBar(struct ProcPrepUnit *proc, s8 val)
 {
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
     if (0 == val) {
         ClearText(&gPrepUnitTexts[0x15]);
         PutDrawText(
@@ -427,6 +479,9 @@ void ProcPrepUnit_OnInit(struct ProcPrepUnit *proc)
     proc->yDiff_cur = ((struct ProcAtMenu *)(proc->proc_parent))->yDiff;
     proc->list_num_pre = proc->list_num_cur;
     proc->button_blank = 0;
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void ProcPrepUnit_InitScreen(struct ProcPrepUnit *proc)
@@ -699,6 +754,9 @@ void sub_809B478(struct ProcPrepUnit *proc)
         if (!(unit->state & (US_DEAD | US_NOT_DEPLOYED | US_BIT16)))
             proc->cur_counter++;
     }
+#ifdef EUROPE
+    asm("NOP\nNOP\nNOP\nNOP\nNOP\nNOP\n");
+#endif
 }
 
 void PrepUnitDisableDisp()
@@ -725,6 +783,10 @@ void sub_809B520(struct ProcPrepUnit *proc)
     list_num = GetLatestUnitIndexInPrepListByUId();
     proc->list_num_pre = list_num;
     proc->list_num_cur = list_num;
+
+#ifdef EUROPE
+    asm("NOP\nNOP\n");
+#endif
 }
 
 CONST_DATA u16 obj_08A18E34[] = {
