@@ -12,7 +12,11 @@
 #include "worldmap.h"
 
 // uninitialized memory in the original build due to changing this call to no longer use __FILE__.
+#ifdef EUROPE
+const u32 gUninitializedMemory = 0x7800303E;
+#else
 const u16 gUninitializedMemory[] = {0x4641, 0x464A, 0x4653, 0x465C};
+#endif
 
 #ifdef EUROPE
 const char gBuildDateTime[] = "2005/07/12(TUE) 19:24:55";
