@@ -98,8 +98,68 @@ def parse_string_shiftjis_core(data, cur_idx):
         output = "[.]"
     elif u16_data == 0x7F:
         output = "[DashedLine]"
-    elif u16_data == 0xE9:
-        output = "[AccentedE]"
+    elif u16_data == 0x8C:
+        output = "[UppercaseOAndEGlued]"
+    elif u16_data == 0x9C:
+        output = "[OAndEGlued]"
+    elif u16_data >= 0xA1 and u16_data <= 0xFF:
+        output = chr(u16_data)
+    # elif u16_data == 0xA1:
+    #     output = "[UpsideDownExclamationMark]"
+    # elif u16_data == 0xC4:
+    #     output = "[UppercaseUmlautA]"
+    # elif u16_data == 0xC7:
+    #     output = "[UppercaseCedillaC]"
+    # elif u16_data == 0xCD:
+    #     output = "[UppercaseAcuteAccentI]"
+    # elif u16_data == 0xDA:
+    #     output = "[UppercaseAcuteAccentU]"
+    # elif u16_data == 0xD6:
+    #     output = "[UppercaseUmlautO]"
+    # elif u16_data == 0xDC:
+    #     output = "[UppercaseUmlautU]"
+    # elif u16_data == 0xDF:
+    #     output = "[Eszett]"
+    # elif u16_data == 0xE0:
+    #     output = "[GraveAccentA]"
+    # elif u16_data == 0xE1:
+    #     output = "[AcuteAccentA]"
+    # elif u16_data == 0xE2:
+    #     output = "[CircumflexA]"
+    # elif u16_data == 0xE4:
+    #     output = "[UmlautA]"
+    # elif u16_data == 0xE7:
+    #     output = "[CedillaC]"
+    # elif u16_data == 0xE8:
+    #     output = "[GraveAccentE]"
+    # elif u16_data == 0xE9:
+    #     output = "[AccentedE]"
+    # elif u16_data == 0xEA:
+    #     output = "[CircumflexE]"
+    # elif u16_data == 0xEB:
+    #     output = "[UmlautE]"
+    # elif u16_data == 0xED:
+    #     output = "[AcuteAccentI]"
+    # elif u16_data == 0xEE:
+    #     output = "[CircumflexI]"
+    # elif u16_data == 0xEF:
+    #     output = "[UmlautI]"
+    # elif u16_data == 0xF1:
+    #     output = "[TildeN]"
+    # elif u16_data == 0xF3:
+    #     output = "[AcuteAccentO]"
+    # elif u16_data == 0xF4:
+    #     output = "[CircumflexO]"
+    # elif u16_data == 0xF6:
+    #     output = "[UmlautO]"
+    # elif u16_data == 0xF9:
+    #     output = "[GraveAccentU]"
+    # elif u16_data == 0xFA:
+    #     output = "[AcuteAccentU]"
+    # elif u16_data == 0xFB:
+    #     output = "[CircumflexU]"
+    # elif u16_data == 0xFC:
+    #     output = "[UmlautU]"
     elif u16_data == 0x80: # face ctrl
         appr_len = 1
         ctrl = data[cur_idx + 1]
